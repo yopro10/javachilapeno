@@ -1,66 +1,290 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chilapeños</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eventos | Chilapeños</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===========================
+       Estilos compartidos (navbar actualizado para coincidir con Principal.html)
+       =========================== */
+    body {
+      background-color: #ffffff;
+      color: #222;
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Ocultar por defecto admin-only para evitar parpadeo */
+    .admin-only { display: none; }
+
+    /* Navbar (sticky, estilo "píldora" como en la página principal) */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      background-color: #ff6600;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .navbar a.active {
+      background-color: #FFD700;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 🎉 Sección de Eventos */
+    .eventos {
+      padding: 50px 20px;
+      background: #fafafa;
+      text-align: center;
+    }
+
+    .eventos h2 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #ff6600;
+    }
+
+    .eventos p {
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .eventos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .evento-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, background 0.3s, color 0.3s;
+      text-align: left;
+    }
+
+    .evento-card:hover { transform: translateY(-8px); }
+    .evento-card img { width: 100%; height: 180px; object-fit: cover; }
+    .evento-card .contenido { padding: 20px; }
+    .evento-card h3 { margin: 0 0 10px; color: #333; }
+    .evento-card p { font-size: 14px; color: #666; }
+    .evento-card .btn { display: inline-block; margin-top: 15px; padding: 10px 15px; background: #ff6600; color: #fff; border-radius: 8px; text-decoration: none; transition: background 0.3s; }
+    .evento-card .btn:hover { background: #e65500; }
+
+    /* Botones flotantes (idénticos a Principal & Contacto) */
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .floating-buttons a, .floating-buttons button {
+      width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background-color: #ff6600; color: #fff; font-size: 22px; text-decoration: none; box-shadow: 0px 4px 8px rgba(0,0,0,0.3); transition: transform 0.2s ease-in-out; border: none; cursor: pointer;
+    }
+
+    .floating-buttons a:hover, .floating-buttons button:hover { transform: scale(1.1); }
+
+    .btn-whatsapp { background-color: #25D366; }
+    .btn-chat { background-color: #0078FF; }
+    .btn-login { background-color: #333; }
+    .btn-dark { background-color: #111; }
+
+    /* Footer */
+    footer { background-color: #2d0c88; color: #fff; padding: 20px; text-align: center; }
+    footer h3 { color: #FFD700; }
+
+    /* Modo oscuro */
+    body.dark-mode { background-color: #121212; color: #eee; }
+    body.dark-mode nav { background-color: #1a1a1a; }
+    body.dark-mode nav a { color: #fff; }
+    body.dark-mode .eventos { background: #1e1e1e; }
+    body.dark-mode .evento-card { background: #2a2a2a; color: #eee; }
+    body.dark-mode .evento-card h3 { color: #ff944d; }
+    body.dark-mode .evento-card p { color: #ccc; }
+    body.dark-mode footer { background-color: #211d2f; color: #ccc; }
+    body.dark-mode footer h3 { color: #ff944d; }
+
+    /* Responsive pequeño */
+    @media (max-width: 480px) {
+      .evento-card img { height: 160px; }
+      .floating-buttons { bottom: 15px; right: 15px; }
+      .floating-buttons a, .floating-buttons button { width: 50px; height: 50px; font-size: 18px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- 🔝 Barra superior -->
+<!-- Barra superior (idéntica a Principal & Contacto) -->
 <nav class="navbar">
-    <a href="Principal.html">Inicio</a>
-    <a href="Eventos.html" class="active">Eventos</a>
-    <a href="contacto.html">Contáctanos</a>
+  <a href="Principal.html">Inicio</a>
+  <a href="Eventos.html" class="active">Eventos</a>
+  <a href="contacto.html">Contáctanos</a>
+  <!-- PANEL ADMIN: presente en todas las páginas (oculto por defecto) -->
+  <a href="PanelAdmin.html" class="admin-only">Panel Admin</a>
 </nav>
 
+<!-- Fallback inline: mostrar Panel Admin inmediatamente si userRole === 'admin' -->
+<script>
+  (function(){
+    try {
+      const cur = localStorage.getItem('currentUser');
+      const role = localStorage.getItem('userRole');
+      const adminLink = document.querySelector('.navbar .admin-only');
+      if (adminLink && cur && role === 'admin') {
+        adminLink.style.display = 'inline-block';
+      } else if (!adminLink && document.querySelector('.navbar') && cur && role === 'admin') {
+        const a = document.createElement('a');
+        a.href = 'PanelAdmin.html';
+        a.className = 'admin-only';
+        a.textContent = 'Panel Admin';
+        a.style.display = 'inline-block';
+        document.querySelector('.navbar').appendChild(a);
+      }
+      // console log para depuración local (puedes quitarlo en producción)
+      console.log('[FALLBACK eventos] currentUser:', cur, 'role:', role, 'adminLinkFound:', !!document.querySelector('.navbar .admin-only'));
+    } catch (e) {
+      console.error('[FALLBACK eventos] error', e);
+    }
+  })();
+</script>
 
-<!-- parte inicial -->
-<section class="inciio">
-    <div class="inicio-content">
-        <h1>¿Qué te provoca hoy?</h1>
-        <div class="buttons">
-            <a href="Principal.html" class="btn btn-orange">MENÚ</a>
-            <a href="https://wa.me/573144230347" target="_blank" class="btn btn-red">PEDIR DOMICILIO</a>
-        </div>
+<!-- 🎉 Sección de Eventos -->
+<section class="eventos">
+  <h2>Próximos Eventos</h2>
+  <p>Disfruta de experiencias únicas en Chilapeños. ¡Reserva tu lugar y no te lo pierdas!</p>
+
+  <div class="eventos-grid">
+    <!-- Evento 1 -->
+    <div class="evento-card">
+      <img src="imagenes/Eventos/Evento1.png" alt="Noche Mexicana">
+      <div class="contenido">
+        <h3>Noche Mexicana</h3>
+        <p>Un viaje gastronómico con música en vivo y promociones especiales en margaritas.</p>
+        <p><strong>📅 Viernes 25 de septiembre, 8:00 p.m</strong></p>
+        <a href="#" class="btn">Reservar</a>
+      </div>
     </div>
-</section>
 
-<!-- 🍔 Categorías -->
-<section class="categorias">
-    <p class="banner">Todos nuestros domicilios tienen recargo dependiendo del lugar del domicilio</p>
+    <!-- Evento 2 -->
+    <div class="evento-card">
+      <img src="imagenes/Eventos/Evento2.png" alt="Tarde de Mariachi">
+      <div class="contenido">
+        <h3>Tarde de Mariachi</h3>
+        <p>Vive la tradición mexicana con mariachis en vivo y menú especial de tacos.</p>
+        <p><strong>📅 Domingo 27 de septiembre, 4:00 p.m</strong></p>
+        <a href="#" class="btn">Reservar</a>
+      </div>
+    </div>
+
+    <!-- Evento 3 -->
+    <div class="evento-card">
+      <img src="imagenes/Eventos/Evento3.png" alt="Noche de Karaoke">
+      <div class="contenido">
+        <h3>Noche de Karaoke</h3>
+        <p>Demuestra tu talento en el escenario y gana premios con tu voz.</p>
+        <p><strong>📅 Miércoles 30 de septiembre, 7:00 p.m</strong></p>
+        <a href="#" class="btn">Reservar</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Footer -->
 <footer class="footer">
-    <div class="footer-container">
-        <div class="footer-logo">
-            <img src="imagenes/varios/logo.png" alt="logo chilapeños">
-            <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
-                Pide tu domicilio en nuestro WhatsApp o llamanos al <br><strong>314 4230347</strong></p>
-        </div>
-
-        <div class="footer-info">
-            <h3>Horario de atención</h3>
-            <p>Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
-            <p>Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
-            <p>Domingos: 1:00 p.m – 9:00 p.m</p>
-
-            <h3>Métodos de pago</h3>
-            <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
-            <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
-        </div>
-
-        <div class="footer-contact">
-            <h3>Contáctanos</h3>
-            <p>📍 Normandía sobre la CAlLE 63 #78-25, Bogotá</p>
-            <p>📞 Domicilios: 314 4230347 </p>
-        </div>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="imagenes/varios/logo.png" alt="logo chilapeños" style="max-width: 120px;">
+      <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
+        Pide tu domicilio en nuestro WhatsApp o llámanos al <br><strong>314 4230347</strong></p>
     </div>
 
-    <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
+    <div class="footer-info">
+      <h3>Horario de atención</h3>
+      <p>Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
+      <p>Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
+      <p>Domingos: 1:00 p.m – 9:00 p.m</p>
+
+      <h3>Métodos de pago</h3>
+      <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
+      <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Contáctanos</h3>
+      <p>📍 Normandía sobre la CALLE 63 #78-25, Bogotá</p>
+      <p>📞 Domicilios: 314 4230347 </p>
+    </div>
+  </div>
+
+  <p class="footer-copy">software3 | Copyright © 2025 
+    <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
+
+<!-- Botones flotantes (misma colección que en Principal/Contacto) -->
+<div class="floating-buttons">
+  <a href="login.html" class="btn-login" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
+  <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
+  <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
+</div>
+
+<!-- Carga del script de autenticación común (si usas el mismo auth.js) -->
+<script src="js/auth.js"></script>
+
+<!-- Script modo oscuro con swap de icono -->
+<script>
+  (function(){
+    const toggleBtn = document.getElementById('darkModeToggle');
+    if (!toggleBtn) return;
+    const body = document.body;
+
+    // Inicializa icono si body ya tiene clase (útil si quieres persistir modo)
+    const icon = toggleBtn.querySelector('i');
+    if (body.classList.contains('dark-mode')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (!icon) return;
+      if (body.classList.contains('dark-mode')) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+      else { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+    });
+  })();
+</script>
 
 </body>
 </html>

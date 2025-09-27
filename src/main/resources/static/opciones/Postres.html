@@ -3,12 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú - Donde Rafa</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body class="dark-theme">
+    <title>Postres - Chilapeños</title>
+    
+    <!-- Iconos (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Barra de navegación -->
+    <style>
+        /* ✅ Fondo blanco por defecto */
+        body {
+            background-color: #ffffff;
+            color: #222;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 🔝 Navbar - Mismo estilo que la página principal */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background-color: #ff6600;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar a.active {
+            background-color: #FFD700;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 🍽️ Contenedor del menú */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .menu-container h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #ff6600;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .menu-container h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* 🍔 Grid de elementos del menú */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .item {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
+            border-color: #ff6600;
+        }
+
+        .item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .item h2 {
+            color: #ff6600;
+            font-size: 1.3rem;
+            margin: 15px 0 10px 0;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .item p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 🔘 Botones flotantes */
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .floating-buttons a, 
+        .floating-buttons button {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ff6600;
+            color: #fff;
+            font-size: 22px;
+            text-decoration: none;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease-in-out;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-buttons a:hover,
+        .floating-buttons button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Colores personalizados */
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-chat { background-color: #0078FF; }
+        .btn-noti { background-color: #FF4444; }
+        .btn-login { background-color: #333; }
+        .btn-dark { background-color: #111; }
+
+        /* ✅ Footer en modo claro */
+        footer {
+            background-color: #333333;
+            color: #fff;
+            padding: 40px 20px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .footer-logo img {
+            max-width: 120px;
+            margin-bottom: 15px;
+        }
+
+        footer h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        footer p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-copy {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+        }
+
+        .footer-copy span {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* 🌙 Modo oscuro */
+        body.dark-mode {
+            background-color: #121212;
+            color: #eee;
+        }
+
+        body.dark-mode .item {
+            background-color: #1e1e1e;
+            color: #eee;
+        }
+
+        body.dark-mode .item h2 {
+            color: #ff944d;
+        }
+
+        body.dark-mode .item p {
+            color: #ccc;
+        }
+
+        body.dark-mode footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+        }
+
+        body.dark-mode footer h3 {
+            color: #ff944d;
+        }
+
+        /* 📱 Responsive */
+        @media (max-width: 768px) {
+            .menu-container {
+                padding: 20px 15px;
+            }
+
+            .menu-container h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .floating-buttons {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .floating-buttons a,
+            .floating-buttons button {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🔝 Barra de navegación -->
 <nav class="navbar">
     <a href="../Principal.html">Inicio</a>
     <a href="../Eventos.html">Eventos</a>
@@ -18,18 +274,18 @@
 <!-- Sección del Menú -->
 <main class="menu-container">
     <h1>Postres</h1>
-    <h2>Menu</h2>
+    <h2>Endulza tu experiencia</h2>
 
     <div class="menu-items">
 
         <div class="item">
-            <img src="../imagenes/Postres/DulceDeMora.PNG" alt="Dulce de Mora">
+            <img src="../imagenes/Postres/Dulcedemora.png" alt="Dulce de Mora">
             <h2>Dulce de Mora... $5.000</h2>
             <p>Disfruta de nuestro delicioso dulce de mora, elaborado con fruta fresca y azúcar de la más alta calidad.</p>
         </div>
 
         <div class="item">
-            <img src="../imagenes/Postres/DulceDeCereza.PNG" alt="Dulce de Cereza">
+            <img src="../imagenes/Postres/Dulcedecereza.png" alt="Dulce de Cereza">
             <h2>Dulce de Cereza... $5.000</h2>
             <p>Un dulce exquisito con la frescura de la cereza, un sabor único para los amantes de la fruta.</p>
         </div>
@@ -67,7 +323,7 @@
         <div class="footer-logo">
             <img src="../imagenes/varios/logo.png" alt="logo chilapeños">
             <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
-                Pide tu domicilio en nuestro WhatsApp o llamanos al <br><strong>314 4230347</strong></p>
+                Pide tu domicilio en nuestro WhatsApp o llámanos al <br><strong>314 4230347</strong></p>
         </div>
 
         <div class="footer-info">
@@ -83,13 +339,58 @@
 
         <div class="footer-contact">
             <h3>Contáctanos</h3>
-            <p>📍 Normandía sobre la CAlLE 63 #78-25, Bogotá</p>
+            <p>📍 Normandía sobre la CALLE 63 #78-25, Bogotá</p>
             <p>📞 Domicilios: 314 4230347 </p>
         </div>
     </div>
 
-    <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
+    <p class="footer-copy">software3 | Copyright © 2025 
+        <span>chilapeñitos.com</span> - Todos los derechos reservados
+    </p>
 </footer>
+
+<!-- 🔘 Botones flotantes -->
+<div class="floating-buttons">
+    <!-- Inicio de sesión -->
+    <a href="../login.html" class="btn-login" title="Iniciar Sesión">
+        <i class="fas fa-user"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ChatBot -->
+    <button class="btn-chat" title="ChatBot">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- 🌙 Modo oscuro -->
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
+
+<!-- Script para modo oscuro -->
+<script>
+    const toggleBtn = document.getElementById("darkModeToggle");
+    const body = document.body;
+
+    toggleBtn.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        // Cambiar ícono dinámicamente
+        const icon = toggleBtn.querySelector("i");
+        if (body.classList.contains("dark-mode")) {
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+        } else {
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+        }
+    });
+</script>
 
 </body>
 </html>
