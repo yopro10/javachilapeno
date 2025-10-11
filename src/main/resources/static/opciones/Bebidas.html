@@ -3,400 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebidas - Chilapeños</title>
-    
+    <title>Menú - Donde Rafa</title>
+    <link rel="stylesheet" href="../css/prueba.css">
     <!-- Iconos (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        /* ✅ Fondo blanco por defecto */
-        body {
-            background-color: #ffffff;
-            color: #222;
-            transition: background-color 0.3s, color 0.3s;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        /* 🔝 Navbar - Mismo estilo que la página principal */
-        .navbar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 15px;
-            background-color: #ff6600;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 16px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .navbar a.active {
-            background-color: #FFD700;
-            color: #333;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 🍽️ Contenedor del menú */
-        .menu-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .menu-container h1 {
-            text-align: center;
-            font-size: 3rem;
-            color: #ff6600;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .menu-container h2 {
-            text-align: center;
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        /* 🍔 Grid de elementos del menú */
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .item {
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
-            border-color: #ff6600;
-        }
-
-        .item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .item h2 {
-            color: #ff6600;
-            font-size: 1.3rem;
-            margin: 15px 0 10px 0;
-            text-align: left;
-            font-weight: bold;
-        }
-
-        .item p {
-            color: #666;
-            line-height: 1.6;
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
-        /* 🔘 Botones flotantes */
-        .floating-buttons {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .floating-buttons a, 
-        .floating-buttons button {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #ff6600;
-            color: #fff;
-            font-size: 22px;
-            text-decoration: none;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
-            transition: transform 0.2s ease-in-out;
-            border: none;
-            cursor: pointer;
-        }
-
-        .floating-buttons a:hover,
-        .floating-buttons button:hover {
-            transform: scale(1.1);
-        }
-
-        /* Colores personalizados */
-        .btn-whatsapp { background-color: #25D366; }
-        .btn-chat { background-color: #0078FF; }
-        .btn-login { background-color: #333; }
-        .btn-dark { background-color: #111; }
-
-        /* ✅ Footer en modo claro */
-        footer {
-            background-color: #333333;
-            color: #fff;
-            padding: 40px 20px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: left;
-        }
-
-        .footer-logo img {
-            max-width: 120px;
-            margin-bottom: 15px;
-        }
-
-        footer h3 {
-            color: #FFD700;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        footer p {
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .footer-copy {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            font-size: 0.9rem;
-        }
-
-        .footer-copy span {
-            color: #FFD700;
-            font-weight: bold;
-        }
-
-        /* 🌙 Modo oscuro */
-        body.dark-mode {
-            background-color: #121212;
-            color: #eee;
-        }
-
-        body.dark-mode .item {
-            background-color: #1e1e1e;
-            color: #eee;
-        }
-
-        body.dark-mode .item h2 {
-            color: #ff944d;
-        }
-
-        body.dark-mode .item p {
-            color: #ccc;
-        }
-
-        body.dark-mode footer {
-            background-color: #1a1a1a;
-            color: #ccc;
-        }
-
-        body.dark-mode footer h3 {
-            color: #ff944d;
-        }
-
-        /* 📱 Responsive */
-        @media (max-width: 768px) {
-            .menu-container {
-                padding: 20px 15px;
-            }
-
-            .menu-container h1 {
-                font-size: 2.5rem;
-            }
-
-            .menu-items {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .floating-buttons {
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .floating-buttons a,
-            .floating-buttons button {
-                width: 50px;
-                height: 50px;
-                font-size: 18px;
-            }
-        }
-    </style>
 </head>
 <body>
-
-<!-- 🔝 Barra de navegación -->
+<!-- Barra de navegación -->
 <nav class="navbar">
     <a href="../Principal.html">Inicio</a>
     <a href="../Eventos.html">Eventos</a>
     <a href="../contacto.html">Contáctanos</a>
+    <a href="#" id="open-cart-btn" class="cart-icon-container">
+        🛒 <span class="cart-counter">0</span>
+    </a>
 </nav>
 
 <!-- Sección del Menú -->
 <main class="menu-container">
     <h1>Bebidas</h1>
-    <h2>Refréscate con nuestras bebidas</h2>
+    <h2>.....</h2>
 
     <div class="menu-items">
 
-        <div class="item">
+        <div class="item" data-nombre="Mandarinazo" data-precio="8000">
             <img src="../imagenes/Bebidas/Mandarinazo.PNG" alt="Mandarinazo">
-            <h2>Mandarinazo... $8.000</h2>
-            <p>Refrescante bebida de mandarina.</p>
+            <h2>Mandarinazo</h2>
+            <p>$8.000 - Refrescante bebida de mandarina.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Agua Flor de Jamaica" data-precio="6000">
             <img src="../imagenes/Bebidas/Aguadeflordejamaica.PNG" alt="Agua Flor de Jamaica">
-            <h2>Agua Flor de Jamaica... $6.000</h2>
-            <p>Bebida fresca y natural de flor de jamaica.</p>
+            <h2>Agua Flor de Jamaica</h2>
+            <p>$6.000 - Bebida fresca y natural de flor de jamaica.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Agua de Tamarindo" data-precio="6000">
             <img src="../imagenes/Bebidas/AguadeTamarindo.PNG" alt="Agua de Tamarindo">
-            <h2>Agua de Tamarindo... $6.000</h2>
-            <p>Bebida tradicional de tamarindo.</p>
+            <h2>Agua de Tamarindo</h2>
+            <p>$6.000 - Bebida tradicional de tamarindo.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Horchata" data-precio="7000">
             <img src="../imagenes/Bebidas/Horchata.PNG" alt="Horchata">
-            <h2>Horchata... $7.000</h2>
-            <p>Bebida refrescante a base de arroz y especias.</p>
+            <h2>Horchata</h2>
+            <p>$7.000 - Bebida refrescante a base de arroz y especias.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Limonada Natural" data-precio="6400">
             <img src="../imagenes/Bebidas/LimonadaNatural.PNG" alt="Limonada Natural">
-            <h2>Limonada Natural... $6.400</h2>
-            <p>Refrescante limonada natural.</p>
+            <h2>Limonada Natural</h2>
+            <p>$6.400 - Refrescante limonada natural.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Limonada Cereza o Coco" data-precio="8000">
             <img src="../imagenes/Bebidas/Limonadadecerezaococo.png" alt="Limonada Cereza o Coco">
-            <h2>Limonada Cereza o Coco... $8.000</h2>
-            <p>Deliciosa limonada de cereza o coco.</p>
+            <h2>Limonada Cereza o Coco</h2>
+            <p>$8.000 - Deliciosa limonada de cereza o coco.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Granizado (fruta a escoger)" data-precio="8400">
             <img src="../imagenes/Bebidas/Granizado.PNG" alt="Granizado (fruta a escoger)">
-            <h2>Granizado (fruta a escoger)... $8.400</h2>
-            <p>Granizado refrescante de fruta a elección.</p>
+            <h2>Granizado (fruta a escoger)</h2>
+            <p>$8.400 - Granizado refrescante de fruta a elección.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Granizado de Mandarina" data-precio="10000">
             <img src="../imagenes/Bebidas/Granizadodemandarina.PNG" alt="Granizado de Mandarina">
-            <h2>Granizado de Mandarina... $10.000</h2>
-            <p>Granizado frío y refrescante de mandarina.</p>
+            <h2>Granizado de Mandarina</h2>
+            <p>$10.000 - Granizado frío y refrescante de mandarina.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Agua Mineral (Botella)" data-precio="4500">
             <img src="../imagenes/Bebidas/Aguaminera.PNG" alt="Agua Mineral (Botella)">
-            <h2>Agua Mineral (Botella)... $4.500</h2>
-            <p>Botella de agua mineral.</p>
+            <h2>Agua Mineral (Botella)</h2>
+            <p>$4.500 - Botella de agua mineral.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Jugos naturales (Leche)" data-precio="7000">
             <img src="../imagenes/Bebidas/Jugosnaturalesdeleche.PNG" alt="Jugos naturales (Leche)">
-            <h2>Jugos naturales (Leche)... $7.000</h2>
-            <p>Jugo natural con base en leche.</p>
+            <h2>Jugos naturales (Leche)</h2>
+            <p>$7.000 - Jugo natural con base en leche.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Jugos naturales (Agua)" data-precio="6000">
             <img src="../imagenes/Bebidas/Jugosnaturalesagua.PNG" alt="Jugos naturales (Agua)">
-            <h2>Jugos naturales (Agua)... $6.000</h2>
-            <p>Jugo natural con base en agua.</p>
+            <h2>Jugos naturales (Agua)</h2>
+            <p>$6.000 - Jugo natural con base en agua.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Coca Cola 600ml" data-precio="5500">
             <img src="../imagenes/Bebidas/CocaCola.PNG" alt="Coca Cola 600ml">
-            <h2>Coca Cola 600ml... $5.500</h2>
-            <p>Bebida gaseosa Coca Cola de 600ml.</p>
+            <h2>Coca Cola 600ml</h2>
+            <p>$5.500 - Bebida gaseosa Coca Cola de 600ml.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Gaseosa 350cc" data-precio="4500">
             <img src="../imagenes/Bebidas/Gaseosa350.PNG" alt="Gaseosa 350cc">
-            <h2>Gaseosa 350cc... $4.500</h2>
-            <p>Bebida gaseosa de 350cc.</p>
+            <h2>Gaseosa 350cc</h2>
+            <p>$4.500 - Bebida gaseosa de 350cc.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Cerveza Nacional" data-precio="4500">
             <img src="../imagenes/Bebidas/CervezaNacional.PNG" alt="Cerveza Nacional">
-            <h2>Cerveza Nacional... $4.500</h2>
-            <p>Cerveza nacional bien fría.</p>
+            <h2>Cerveza Nacional</h2>
+            <p>$4.500 - Cerveza nacional bien fría.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Corona, Sol y Heineken" data-precio="9500">
             <img src="../imagenes/Bebidas/CoronaSolyHeineken.PNG" alt="Corona, Sol y Heineken">
-            <h2>Corona, Sol y Heineken... $9.500</h2>
-            <p>Cervezas internacionales.</p>
+            <h2>Corona, Sol y Heineken</h2>
+            <p>$9.500 - Cervezas internacionales.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Coronita, Tecate y Sol lata" data-precio="6500">
             <img src="../imagenes/Bebidas/Coronitatecateysollata.png" alt="Coronita, Tecate y Sol lata">
-            <h2>Coronita, Tecate y Sol lata... $6.500</h2>
-            <p>Cervezas en lata.</p>
+            <h2>Coronita, Tecate y Sol lata</h2>
+            <p>$6.500 - Cervezas en lata.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Smirnoff y Monster" data-precio="12900">
             <img src="../imagenes/Bebidas/SmirnoffyMonster.PNG" alt="Smirnoff y Monster">
-            <h2>Smirnoff y Monster... $12.900</h2>
-            <p>Bebidas energéticas y alcohólicas.</p>
+            <h2>Smirnoff y Monster</h2>
+            <p>$12.900 - Bebidas energéticas y alcohólicas.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="3 Cordilleras y BBC" data-precio="9500">
             <img src="../imagenes/Bebidas/3CordillerasyBBC.PNG" alt="3 Cordilleras y BBC">
-            <h2>3 Cordilleras y BBC... $9.500</h2>
-            <p>Cervezas artesanales.</p>
+            <h2>3 Cordilleras y BBC</h2>
+            <p>$9.500 - Cervezas artesanales.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-nombre="Club Colombia Dorada, Roja" data-precio="5000">
             <img src="../imagenes/Bebidas/ClubColombiadoradayroja.png" alt="Club Colombia Dorada, Roja">
-            <h2>Club Colombia Dorada, Roja... $5.000</h2>
-            <p>Cerveza Club Colombia en sus variedades.</p>
+            <h2>Club Colombia Dorada, Roja</h2>
+            <p>$5.000 - Cerveza Club Colombia en sus variedades.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
 
-        <div class="item">
-            <img src="../imagenes/Bebidas/ClubNegraodetemo.png" alt="Club Negra o de temo">
-            <h2>Club Negra o de temo... $5.500</h2>
-            <p>Cerveza Club Colombia Negra.</p>
+        <div class="item" data-nombre="Club Negra o de Temo" data-precio="5500">
+            <img src="../imagenes/Bebidas/ClubNegraodetemo.png" alt="ClubNegraodetemo">
+            <h2>Club Negra o de Temo</h2>
+            <p>$5.500 - Cerveza tipo lager.</p>
+            <div class="purchase-panel">
+                <label class="quantity-label">Cantidad:</label>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
+                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
+                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
+                </div>
+                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
-
     </div>
 </main>
 
@@ -406,7 +375,7 @@
         <div class="footer-logo">
             <img src="../imagenes/varios/logo.png" alt="logo chilapeños">
             <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
-                Pide tu domicilio en nuestro WhatsApp o llámanos al <br><strong>314 4230347</strong></p>
+                Pide tu domicilio en nuestro WhatsApp o llamanos al <br><strong>314 4230347</strong></p>
         </div>
 
         <div class="footer-info">
@@ -422,17 +391,58 @@
 
         <div class="footer-contact">
             <h3>Contáctanos</h3>
-            <p>📍 Normandía sobre la CALLE 63 #78-25, Bogotá</p>
+            <p>📍 Normandía sobre la CAlLE 63 #78-25, Bogotá</p>
             <p>📞 Domicilios: 314 4230347 </p>
         </div>
     </div>
 
-    <p class="footer-copy">software3 | Copyright © 2025 
-        <span>chilapeñitos.com</span> - Todos los derechos reservados
-    </p>
+    <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
+<!-- Carrito lateral -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-footer">
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
+        <span class="cart-counter">0</span>
+    </div>
+</div>
 
-<!-- 🔘 Botones flotantes -->
+<!-- Popup Confirmación de pago -->
+<div id="payment-confirmation-popup" class="popup">
+    <div class="popup-content">
+        <h3>¿Seguro que deseas pagar?</h3>
+        <div class="popup-buttons">
+            <button class="confirm-payment-btn">Sí, pagar</button>
+            <button class="cancel-payment-btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Pago exitoso -->
+<div id="payment-success-popup" class="popup">
+    <div class="popup-content">
+        <h3>¡Pago Exitoso!</h3>
+        <p>Tu pedido ha sido recibido y será procesado.</p>
+        <button class="return-btn">Volver al menú</button>
+    </div>
+</div>
+
+<!-- Popup Carrito vacío -->
+<div id="empty-cart-popup" class="popup">
+    <div class="popup-content">
+        <h3>Carrito Vacío</h3>
+        <p>No tienes nada en el carrito. Agrega productos antes de pagar.</p>
+        <button class="return-btn">Cerrar</button>
+    </div>
+</div>
+<!-- 🔘 Botones flotantes (sin Notificaciones) -->
 <div class="floating-buttons">
     <!-- Inicio de sesión -->
     <a href="../login.html" class="btn-login" title="Iniciar Sesión">
@@ -444,7 +454,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- ChatBot -->
+    <!-- Botón flotante para abrir chatbot -->
     <button class="btn-chat" title="ChatBot">
         <i class="fas fa-robot"></i>
     </button>
@@ -455,25 +465,23 @@
     </button>
 </div>
 
-<!-- Script para modo oscuro -->
-<script>
-    const toggleBtn = document.getElementById("darkModeToggle");
-    const body = document.body;
+<!-- Panel del ChatBot -->
+<div id="chatbot-panel">
+    <div class="chatbot-header">
+        <h3>🤖 ChatBot</h3>
+        <button id="close-chatbot">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+        <!-- Los mensajes se insertan por JS -->
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
+        <button id="chatbot-send">Enviar</button>
+    </div>
+</div>
+<div id="overlay"></div>
 
-    toggleBtn.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-
-        // Cambiar ícono dinámicamente
-        const icon = toggleBtn.querySelector("i");
-        if (body.classList.contains("dark-mode")) {
-            icon.classList.remove("fa-moon");
-            icon.classList.add("fa-sun");
-        } else {
-            icon.classList.remove("fa-sun");
-            icon.classList.add("fa-moon");
-        }
-    });
-</script>
-
+<!-- Scripts -->
+<script src="../javascript/js.js"></script>
 </body>
 </html>
