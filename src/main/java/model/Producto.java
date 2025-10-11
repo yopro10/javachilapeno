@@ -7,6 +7,7 @@ public class Producto {
     private String categoria; // ejemplo: bebidas, parrillas, postres
     private int stock;
 
+    // Constructor completo
     public Producto(int id, String nombre, double precio, String categoria, int stock) {
         this.id = id;
         this.nombre = nombre;
@@ -15,7 +16,13 @@ public class Producto {
         this.stock = stock;
     }
 
-    // Getters y Setters
+    // Constructor corto (para pruebas rápidas en Main)
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
+    // Getters y setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -42,3 +49,4 @@ public class Producto {
                 '}';
     }
 }
+

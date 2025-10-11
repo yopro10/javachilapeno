@@ -5,7 +5,7 @@ public class Usuario {
     private String nombre;
     private String email;
     private String password;
-    private String rol; // cliente, admin
+    private String rol;
 
     public Usuario(int id, String nombre, String email, String password, String rol) {
         this.id = id;
@@ -15,7 +15,7 @@ public class Usuario {
         this.rol = rol;
     }
 
-    // Getters y Setters
+    // Getters y setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -30,15 +30,4 @@ public class Usuario {
 
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", rol='" + rol + '\'' +
-                '}';
-    }
 }
-

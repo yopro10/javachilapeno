@@ -8,7 +8,9 @@ body {
     color: #f5f5f5;
     line-height: 1.5;
 }
+/*/////*/
 
+/*/////*/
 /* 🔝 TOP BAR SOLO NAVBAR */
 .top-bar {
     display: flex;
@@ -41,15 +43,19 @@ body {
    ========================= */
 .navbar {
     background-color: #2a2a40;
+    display: flex;
+    justify-content: center;   /* ✅ centra los enlaces */
+    align-items: center;
+    gap: 3rem;                 /* ✅ separa los enlaces */
     padding: 15px;
-    text-align: center;
 }
 
 .navbar a {
     color: #f5f5f5;
-    margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
 .navbar a.active,
@@ -339,9 +345,75 @@ body {
         flex-direction: column;
         text-align: center;
     }
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
     .footer-container {
         flex-direction: column;
         text-align: center;
     }
+    /* =========================
+   🎨 MODAL PERSONALIZADO
+   ========================= */
+    .modal-content {
+        background-color: #2a2a40;  /* Fondo oscuro */
+        color: #f5f5f5;             /* Texto claro */
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0px 6px 20px rgba(0,0,0,0.7);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #444;
+        background: #1e1e2f;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .modal-title {
+        color: #ff9800; /* naranja vivo */
+        font-weight: bold;
+    }
+
+    .modal-body label {
+        font-weight: bold;
+        color: #ddd;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #444;
+        background: #1e1e2f;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    /* Botón cancelar */
+    .btn-cancelar {
+        background: #555;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        padding: 8px 18px;
+        transition: background 0.3s;
+    }
+    .btn-cancelar:hover {
+        background: #777;
+    }
+
+    /* Botón agregar */
+    .btn-agregar {
+        background: #ff9800;
+        color: #000;
+        font-weight: bold;
+        border-radius: 6px;
+        padding: 8px 18px;
+        transition: background 0.3s;
+    }
+    .btn-agregar:hover {
+        background: linear-gradient(45deg, #ff9800, #ffc107);
+        color: #000;
+    }
+
 }
 
