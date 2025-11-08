@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/prueba.css">
     <!-- Iconos (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
@@ -33,12 +32,6 @@
             <h2>Dulce de Mora</h2>
             <p>$5.000 - Disfruta de nuestro delicioso dulce de mora, elaborado con fruta fresca y azúcar de la más alta calidad.</p>
             <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
                 <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
                     Agregar al carrito
                 </button>
@@ -50,12 +43,6 @@
             <h2>Dulce de Cereza</h2>
             <p>$5.000 - Un dulce exquisito con la frescura de la cereza, un sabor único para los amantes de la fruta.</p>
             <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
                 <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
                     Agregar al carrito
                 </button>
@@ -67,12 +54,6 @@
             <h2>Dulce de Fresa</h2>
             <p>$5.000 - El dulce más fresco y suave, hecho con fresas maduras, ideal para disfrutar después de una buena comida.</p>
             <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
                 <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
                     Agregar al carrito
                 </button>
@@ -84,12 +65,6 @@
             <h2>Quesadilla de Arequipe</h2>
             <p>$12.400 - Deliciosa quesadilla rellena de dulce de arequipe, con un toque crujiente y lleno de sabor.</p>
             <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
                 <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
                     Agregar al carrito
                 </button>
@@ -101,12 +76,6 @@
             <h2>Quesadilla de Mora</h2>
             <p>$12.400 - Una mezcla perfecta de queso y mora, en una quesadilla suave que te encantará.</p>
             <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
                 <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
                     Agregar al carrito
                 </button>
@@ -118,12 +87,6 @@
             <h2>Quesadilla de Fresa</h2>
             <p>$12.400 - Quesadilla rellena con un sabor dulce y fresco de fresa, perfecta para el paladar más exigente.</p>
             <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
                 <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
                     Agregar al carrito
                 </button>
@@ -161,6 +124,7 @@
 
     <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
+
 <!-- Carrito lateral -->
 <div id="cart-panel">
     <div class="cart-header">
@@ -205,24 +169,18 @@
         <button class="return-btn">Cerrar</button>
     </div>
 </div>
-<!-- 🔘 Botones flotantes (sin Notificaciones) -->
+
+<!-- 🔘 Botones flotantes -->
 <div class="floating-buttons">
-    <!-- Inicio de sesión -->
     <a href="../login.html" class="btn-login" title="Iniciar Sesión">
         <i class="fas fa-user"></i>
     </a>
-
-    <!-- WhatsApp -->
     <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
-
-    <!-- Botón flotante para abrir chatbot -->
     <button class="btn-chat" title="ChatBot">
         <i class="fas fa-robot"></i>
     </button>
-
-    <!-- 🌙 Modo oscuro -->
     <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
         <i class="fas fa-moon"></i>
     </button>
@@ -234,9 +192,7 @@
         <h3>🤖 ChatBot</h3>
         <button id="close-chatbot">&times;</button>
     </div>
-    <div class="chatbot-messages" id="chatbot-messages">
-        <!-- Los mensajes se insertan por JS -->
-    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
     <div class="chatbot-footer">
         <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
         <button id="chatbot-send">Enviar</button>

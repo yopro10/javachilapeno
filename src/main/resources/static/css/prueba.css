@@ -1,4 +1,11 @@
+/* === PRUEBA.CSS (ACTUALIZADO) ===
+   Mantengo tu paleta, sombras y componentes tal como los tenías.
+   Ajustes: tarjetas con layout flex, imágenes y botones alineados, altura uniforme,
+   grid de items que estira las tarjetas para que sean simétricas. */
+
 /* --- Global Styles --- */
+* { box-sizing: border-box; }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,6 +13,8 @@ body {
     color: #333;
     transition: background-color 0.3s, color 0.3s;
 }
+
+/* pequeños estilos para botón eliminar (mantener) */
 .remove-item-btn {
     background: none;
     border: none;
@@ -15,105 +24,48 @@ body {
     margin-left: 10px;
     transition: color 0.2s;
 }
-.remove-item-btn:hover {
-    color: #e57373;
-}
-body.cart-open .floating-buttons {
-    display: none;
-}
+.remove-item-btn:hover { color: #e57373; }
 
+body.cart-open .floating-buttons { display: none; }
+
+/* Dark mode overrides (mantengo tu estilo) */
 body.dark-mode {
     background: #121212;
     color: #f1f1f1;
 }
-/* Carrito en modo oscuro */
-body.dark-mode #cart-panel {
-    background: #1e1e1e;
-    color: #f1f1f1;
-}
-body.dark-mode #cart-panel .cart-header {
-    background: #ff6600; /* mantenemos naranja */
-    color: #fff;
-}
-body.dark-mode #cart-panel .cart-item span {
-    color: #f1f1f1;
-}
-body.dark-mode #cart-panel .cart-footer {
-    border-top: 1px solid #444;
-}
-body.dark-mode #cart-panel .empty-cart-message {
-    color: #aaa;
-}
+/* ... (mantengo tus overrides en modo oscuro) ... */
+body.dark-mode #cart-panel { background: #1e1e1e; color: #f1f1f1; }
+body.dark-mode #cart-panel .cart-header { background: #ff6600; color: #fff; }
+body.dark-mode #cart-panel .cart-item span { color: #f1f1f1; }
+body.dark-mode #cart-panel .cart-footer { border-top: 1px solid #444; }
+body.dark-mode #cart-panel .empty-cart-message { color: #aaa; }
+body.dark-mode #chatbot-panel { background: #1e1e1e; color: #f1f1f1; }
+body.dark-mode #chatbot-panel .chatbot-header { background: #ff6600; color: #fff; }
+body.dark-mode #chatbot-panel .bot-msg { background: #333; color: #f1f1f1; }
+body.dark-mode #chatbot-panel #chatbot-input { background: #2a2a2a; color: #f1f1f1; border: none; }
+body.dark-mode #chatbot-panel #chatbot-send { background: #28a745; }
+body.dark-mode .item { background-color: #1e1e1e; color: #eee; }
+body.dark-mode .item h2 { color: #ff944d; }
+body.dark-mode .item p { color: #ccc; }
+body.dark-mode footer { background-color: #1a1a1a; color: #ccc; }
+body.dark-mode footer h3 { color: #ff944d; }
 
-/* Chatbot en modo oscuro */
-body.dark-mode #chatbot-panel {
-    background: #1e1e1e;
-    color: #f1f1f1;
-}
-body.dark-mode #chatbot-panel .chatbot-header {
-    background: #ff6600;
-    color: #fff;
-}
-body.dark-mode #chatbot-panel .bot-msg {
-    background: #333;
-    color: #f1f1f1;
-}
-body.dark-mode #chatbot-panel #chatbot-input {
-    background: #2a2a2a;
-    color: #f1f1f1;
-    border: none;
-}
-body.dark-mode #chatbot-panel #chatbot-send {
-    background: #28a745;
-}
-body.dark-mode .item {
-    background-color: #1e1e1e;
-    color: #eee;
-}
-
-body.dark-mode .item h2 {
-    color: #ff944d;
-}
-
-body.dark-mode .item p {
-    color: #ccc;
-}
-
-body.dark-mode footer {
-    background-color: #1a1a1a;
-    color: #ccc;
-}
-
-body.dark-mode footer h3 {
-    color: #ff944d;
-}
 /* --- Opciones dentro del ChatBot --- */
-#chatbot-panel .chatbot-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 12px 0;
-}
-
+#chatbot-panel .chatbot-options { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
 #chatbot-panel .chatbot-options button {
     width: 100%;
     padding: 12px 16px;
     background: #ff6600;
     color: #fff;
     border: none;
-    border-radius: 8px;   /* Recto con esquinas suaves */
+    border-radius: 8px;
     font-size: 0.95em;
     font-weight: bold;
     text-align: left;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.1s ease;
 }
-
-/* Hover bonito */
-#chatbot-panel .chatbot-options button:hover {
-    background: #e65500;
-    transform: scale(1.02);
-}
+#chatbot-panel .chatbot-options button:hover { background: #e65500; transform: scale(1.02); }
 
 /* --- Navigation --- */
 .navbar {
@@ -123,7 +75,6 @@ body.dark-mode footer h3 {
     padding: 12px 15px;
     background-color: #ff6600;
 }
-
 .navbar a {
     color: white;
     text-decoration: none;
@@ -132,25 +83,10 @@ body.dark-mode footer h3 {
     border-radius: 25px;
     transition: all 0.3s ease;
 }
+.navbar a:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+.navbar a.active { background-color: #FFD700; color: #333; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
 
-.navbar a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-}
-
-.navbar a.active {
-    background-color: #FFD700;
-    color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.cart-icon-container {
-    position: relative;
-    color: white;
-    font-size: 1.2em;
-    text-decoration: none;
-}
-
+.cart-icon-container { position: relative; color: white; font-size: 1.2em; text-decoration: none; }
 .cart-counter {
     background-color: #ff5722;
     color: white;
@@ -169,7 +105,6 @@ body.dark-mode footer h3 {
     padding: 40px 20px;
     text-align: center;
 }
-
 .menu-container h1 {
     font-size: 2.5em;
     color: #ff6600;
@@ -177,7 +112,6 @@ body.dark-mode footer h3 {
     font-weight: bold;
     text-transform: uppercase;
 }
-
 .menu-container h2 {
     font-size: 1.2em;
     color: #666;
@@ -185,137 +119,168 @@ body.dark-mode footer h3 {
     font-style: italic;
 }
 
+/* --- GRID: hago que las tarjetas se estiren igual --- */
 .menu-items {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 20px;
+    align-items: stretch; /* importante: estira cada tarjeta para que la altura sea consistente */
 }
 
+/* === ITEM (TARJETA) ===
+   ADAPTACIÓN: uso flex-column y justify-content: space-between
+   para que imagen, texto y botón queden alineados y la tarjeta sea simétrica. */
 .item {
     background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     transition: all 0.3s ease;
     border: 2px solid transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* empuja el botón al pie de la tarjeta */
+    min-height: 420px; /* fuerza uniformidad: ajusta si quieres tarjetas más altas/bajas */
 }
 
+/* efecto hover similar al tuyo con naranja */
 .item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
+    box-shadow: 0 15px 30px rgba(255, 102, 0, 0.12);
     border-color: #ff6600;
 }
 
+/* imagen con tamaño fijo para consistencia */
 .item img {
     width: 100%;
-    height: 200px;
+    height: 200px; /* fija la altura para todas las imágenes */
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
+/* cabecera del producto - mantengo color y estilo */
 .item h2 {
     color: #ff6600;
-    font-size: 1.2rem;
-    margin: 10px 0;
-    font-weight: bold;
+    font-size: 1.15rem;
+    margin: 6px 0 8px 0;
+    font-weight: 700;
+    text-align: left;
 }
 
+/* descripción: max líneas, alineada y con espacio flexible */
 .item p {
     color: #666;
     line-height: 1.6;
-    margin: 0;
+    margin: 0 0 14px 0;
     font-size: 0.95rem;
+    text-align: left;
+    flex: 1 1 auto; /* ocupa espacio disponible antes del purchase-panel */
 }
 
+/* === PURCHASE PANEL ===
+   ADAPTACIÓN: centro del botón y (si mantienes cantidad) lo dejo debajo sin romper alineación */
 .purchase-panel {
-    margin-top: 10px;
+    margin-top: 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 12px;
 }
 
+/* Mantengo tu estilo visual para la etiqueta (si la ves, puedes ocultarla) */
 .quantity-label {
     color: #FBC531;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.05em;
     letter-spacing: 1px;
 }
 
+/* controls (si decides mantener la cantidad). Si no quieres mostrar cantidad, simplemente elimina
+   el bloque HTML de cantidad en cada item o pon .quantity-control{display:none;} */
 .quantity-control {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
+    gap: 6px;
 }
-
 .quantity-input {
-    width: 40px;
+    width: 48px;
     padding: 6px;
     text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
 }
-
 .quantity-btn {
     background: #ffcc00;
     color: #333;
     border: none;
-    border-radius: 4px;
-    width: 30px;
-    height: 30px;
-    font-size: 1.2em;
+    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
 }
+.quantity-btn:hover { background-color: #ffd452; }
 
-.quantity-btn:hover {
-    background-color: #FFD452;
-}
-
+/* === BOTÓN Añadir al carrito (estético como el que mostraste) ===
+   ADAPTACIÓN: botón tipo chip con icono, sombra y borde redondeado */
 .add-to-cart-btn {
-    background: #ff6600;
-    color: white;
-    font-weight: bold;
-    padding: 8px 14px;
+    background: linear-gradient(#ffd966,#ffcc66);
+    color: #222;
+    font-weight: 700;
+    padding: 10px 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
+/* icono pequeño a la izquierda (usa font-awesome) */
+.add-to-cart-btn::before {
+    content: "\f07a"; /* unicode del icono carrito de fontawesome */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-style: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 0.95em;
+    color: #222;
+}
+
+/* hover */
 .add-to-cart-btn:hover {
-    background-color: #e65500;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,102,0,0.12);
 }
 
-/* --- Cart Panel --- */
+/* === CART PANEL (mantengo tu diseño con ajustes menores) === */
 #cart-panel {
     position: fixed;
-    top: 10px;               /* separado de arriba */
-    right: 10px;             /* se despega del borde derecho */
-    width: clamp(280px, 80vw, 350px);
-    height: calc(100% - 20px); /* ajusta altura con el margen */
+    top: 10px;
+    right: 10px;
+    width: clamp(280px, 80vw, 360px);
+    height: calc(100% - 20px);
     background-color: #fff;
     box-shadow: -6px 0 12px rgba(0,0,0,0.3);
-    transform: translateX(120%); /* se oculta fuera */
+    transform: translateX(120%);
     transition: transform 0.4s ease-in-out;
     display: flex;
     flex-direction: column;
     z-index: 1000;
-
-    /* Bordes en todos los lados */
     border-radius: 12px;
     overflow: hidden;
 }
+#cart-panel.active { transform: translateX(0); }
 
-#cart-panel.active {
-    transform: translateX(0);
-}
-
-/* --- Header del carrito --- */
 .cart-header {
     background: #ff6600;
     color: #fff;
@@ -323,27 +288,16 @@ body.dark-mode footer h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    /* Redondeo arriba a la izquierda */
     border-radius: 12px 0 0 0;
 }
+.cart-header button { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
 
-.cart-header button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-/* --- Items del carrito --- */
 .cart-items {
     flex-grow: 1;
-    padding: 10px;
+    padding: 12px;
     overflow-y: auto;
     max-height: 60vh;
 }
-
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -351,40 +305,21 @@ body.dark-mode footer h3 {
     border-bottom: 1px solid #eee;
     padding: 10px;
     background: #fafafa;
-    border-radius: 8px; /* Redondeo de cada item */
+    border-radius: 8px;
 }
+.cart-item:last-child { border-bottom: none; }
+.cart-item p { margin: 0; font-size: 1em; font-weight: bold; color: #333; }
 
-.cart-item:last-child {
-    border-bottom: none;
-}
-
-.cart-item p {
-    margin: 0;
-    font-size: 1em;
-    font-weight: bold;
-    color: #333;
-}
-
-/* --- Footer --- */
 .cart-footer {
     padding: 15px;
     border-top: 1px solid #ddd;
     text-align: right;
     background: #fff;
-    border-radius: 0 0 0 12px; /* Redondeo abajo a la izquierda */
+    border-radius: 0 0 0 12px;
 }
+.cart-footer p { font-size: 1.2em; font-weight: bold; color: #333; }
+.cart-footer #cart-total { color: #ff6600; }
 
-.cart-footer p {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
-}
-
-.cart-footer #cart-total {
-    color: #ff6600;
-}
-
-/* --- Botón de pagar --- */
 .checkout-btn {
     width: 100%;
     padding: 12px;
@@ -398,65 +333,16 @@ body.dark-mode footer h3 {
     margin-top: 10px;
     transition: background 0.3s ease;
 }
-
-.checkout-btn:hover {
-    background: #218838;
-}
-
-
-.checkout-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.checkout-btn:hover {
-    background-color: #218838;
-}
+.checkout-btn:hover { background: #218838; }
 
 /* --- Popups --- */
+.popup-content { background: #fff; padding: 20px; border-radius: 8px; max-width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.popup-buttons { display: flex; justify-content: space-around; margin-top: 15px; }
+.popup-buttons button { padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
+.confirm-payment-btn { background: #28a745; color: #fff; }
+.cancel-payment-btn, .return-btn { background: #ccc; }
 
-.popup-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.popup-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
-}
-
-.popup-buttons button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#empty-cart-popup .return-btn:hover {
-    background-color: #45a049;
-}
-.confirm-payment-btn {
-    background: #28a745;
-    color: #fff;
-}
-
-.cancel-payment-btn, .return-btn {
-    background: #ccc;
-}
-
-/* --- Footer --- */
+/* === Footer (igual que antes) === */
 footer {
     background-color: #333333;
     color: #fff;
@@ -464,126 +350,42 @@ footer {
     text-align: center;
     margin-top: 60px;
 }
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    text-align: left;
-}
-
-.footer-logo img {
-    width: 350px;
-    margin-bottom: 10px;
-}
-
-footer h3 {
-    color: #FFD700;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
-
-footer p {
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.footer-logo {
-    flex: 1 1 300px;
-    text-align: center;
-}
-
-.footer-logo p {
-    font-size: 14px;
-}
-
-.footer-copy {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #444;
-    font-size: 0.9rem;
-}
-
-.footer-copy span {
-    color: #FFD700;
-    font-weight: bold;
-}
+.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: left; }
+.footer-logo img { width: 350px; margin-bottom: 10px; }
+footer h3 { color: #FFD700; margin-bottom: 15px; font-size: 1.2rem; }
+footer p { line-height: 1.6; margin-bottom: 10px; }
+.footer-logo { flex: 1 1 300px; text-align: center; }
+.footer-logo p { font-size: 14px; }
+.footer-copy { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #444; font-size: 0.9rem; }
+.footer-copy span { color: #FFD700; font-weight: bold; }
 
 /* --- Floating Buttons --- */
 .floating-buttons {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 1000;
+    position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 15px; z-index: 1000;
 }
-
-.floating-buttons a,
-.floating-buttons button {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ff6600;
-    color: #fff;
-    font-size: 22px;
-    text-decoration: none;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease-in-out;
-    border: none;
-    cursor: pointer;
+.floating-buttons a, .floating-buttons button {
+    width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background-color: #ff6600; color: #fff; font-size: 22px; text-decoration: none; box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease-in-out; border: none; cursor: pointer;
 }
-
-.floating-buttons a:hover,
-.floating-buttons button:hover {
-    transform: scale(1.1);
-}
-
-.btn-whatsapp { background-color: #25D366; }
-.btn-chat { background-color: #0078FF; }
-.btn-noti { background-color: #FF4444; }
-.btn-login { background-color: #333; }
-.btn-dark { background-color: #111; }
+.floating-buttons a:hover, .floating-buttons button:hover { transform: scale(1.1); }
+.btn-whatsapp { background-color: #25D366; } .btn-chat { background-color: #0078FF; } .btn-noti { background-color: #FF4444; } .btn-login { background-color: #333; } .btn-dark { background-color: #111; }
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-    .menu-container {
-        padding: 20px 15px;
-    }
-
-    .menu-container h1 {
-        font-size: 2rem;
-    }
-
-    .menu-items {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .floating-buttons {
-        bottom: 15px;
-        right: 15px;
-    }
-
-    .floating-buttons a,
-    .floating-buttons button {
-        width: 50px;
-        height: 50px;
-        font-size: 18px;
-    }
+    .menu-container { padding: 20px 15px; }
+    .menu-container h1 { font-size: 2rem; }
+    .menu-items { grid-template-columns: 1fr; gap: 20px; }
+    .floating-buttons { bottom: 15px; right: 15px; }
+    .floating-buttons a, .floating-buttons button { width: 50px; height: 50px; font-size: 18px; }
+    .item { min-height: auto; } /* permitir que en móviles la altura sea natural */
 }
-/* Panel Chatbot */
+
+/* === Chatbot Panel (igual que antes) === */
 #chatbot-panel {
     position: fixed;
-    bottom: 80px;      /* encima de los botones flotantes */
-    right: 80px;       /* separado del borde derecho */
+    bottom: 80px;
+    right: 80px;
     width: 320px;
     height: 420px;
     background: #fff;
@@ -597,132 +399,89 @@ footer p {
     transition: all 0.3s ease-in-out;
     z-index: 1100;
 }
+#chatbot-panel.active { transform: scale(1); opacity: 1; }
+.chatbot-header { background: #ff6600; color: #fff; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+.chatbot-header button { background: none; border: none; font-size: 20px; color: #fff; cursor: pointer; }
+.chatbot-messages { flex-grow: 1; padding: 10px; overflow-y: auto; font-size: 14px; }
+.bot-msg { background: #f2f2f2; padding: 8px; border-radius: 8px; margin: 5px 0; }
+.chatbot-footer { display: flex; border-top: 1px solid #ddd; }
+#chatbot-input { flex-grow: 1; border: none; padding: 10px; font-size: 14px; }
+#chatbot-send { background: #28a745; color: #fff; border: none; padding: 0 15px; cursor: pointer; }
+#chatbot-send:hover { background: #218838; }
 
-#chatbot-panel.active {
-    transform: scale(1);
-    opacity: 1;
-}
-
-/* Encabezado */
-.chatbot-header {
-    background: #ff6600;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.chatbot-header button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* Mensajes */
-.chatbot-messages {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
-    font-size: 14px;
-}
-.bot-msg {
-    background: #f2f2f2;
-    padding: 8px;
-    border-radius: 8px;
-    margin: 5px 0;
-}
-
-/* Footer */
-.chatbot-footer {
-    display: flex;
-    border-top: 1px solid #ddd;
-}
-#chatbot-input {
-    flex-grow: 1;
-    border: none;
-    padding: 10px;
-    font-size: 14px;
-}
-#chatbot-send {
-    background: #28a745;
-    color: #fff;
-    border: none;
-    padding: 0 15px;
-    cursor: pointer;
-}
-#chatbot-send:hover {
-    background: #218838;
-}
 /* --- Popups Uniformes --- */
-#payment-confirmation-popup,
-#payment-success-popup,
-#empty-cart-popup {
-    display: none;           /* ocultos por defecto */
-    position: fixed;         /* flotan sobre todo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6); /* fondo semitransparente */
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    display: flex;           /* centrado con flexbox */
+#payment-confirmation-popup, #payment-success-popup, #empty-cart-popup {
+    display: none;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000;
 }
-
-/* Contenido interno */
-#payment-confirmation-popup .popup-content,
-#payment-success-popup .popup-content,
-#empty-cart-popup .popup-content {
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    font-family: Arial, sans-serif;
+#payment-confirmation-popup .popup-content, #payment-success-popup .popup-content, #empty-cart-popup .popup-content {
+    background: #fff; padding: 25px 30px; border-radius: 10px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.3); font-family: Arial, sans-serif;
 }
-
-/* Botones */
-.popup-buttons,
-#empty-cart-popup .popup-content button,
-#payment-success-popup .popup-content button {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.popup-buttons button,
-#empty-cart-popup .popup-content button,
-#payment-success-popup .popup-content button {
-    padding: 10px 18px;
+.popup-buttons, #empty-cart-popup .popup-content button, #payment-success-popup .popup-content button { margin-top: 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.popup-buttons button, #empty-cart-popup .popup-content button, #payment-success-popup .popup-content button { padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s ease, transform 0.1s ease; }
+.confirm-payment-btn { background: #28a745; color: #fff; } .cancel-payment-btn, .return-btn { background: #ccc; color: #333; }
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #ff8c1a, #ff6600);
+    color: white;
+    font-weight: 600;
+    padding: 12px 18px;
     border: none;
-    border-radius: 6px;
+    border-radius: 50px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+    box-shadow: 0 6px 15px rgba(255, 102, 0, 0.25);
+    transition: all 0.25s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Colores de los botones */
-.confirm-payment-btn {
-    background: #28a745;
+.add-to-cart-btn::before {
+    content: "\f07a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1.05rem;
+    transition: transform 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(255, 102, 0, 0.35);
+    background: linear-gradient(135deg, #ffa64d, #ff6600);
+}
+
+.add-to-cart-btn:hover::before {
+    transform: scale(1.2) rotate(-10deg);
+}
+
+.add-to-cart-btn:active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    to { opacity: 0; transform: translate(-50%, -50%) scale(20); }
+}
+
+body.dark-mode .add-to-cart-btn {
+    background: linear-gradient(135deg, #ff944d, #e65c00);
     color: #fff;
 }
-.confirm-payment-btn:hover {
-    background: #218838;
-}
 
-.cancel-payment-btn,
-.return-btn {
-    background: #ccc;
-    color: #333;
-}
-.cancel-payment-btn:hover,
-.return-btn:hover {
-    background: #aaa;
+body.dark-mode .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #ffb366, #ff6600);
 }

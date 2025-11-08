@@ -8,22 +8,23 @@ const chatMessages = document.getElementById("chatbot-messages");
 const chatInput = document.getElementById("chatbot-input");
 const sendBtn = document.getElementById("chatbot-send");
 
-// Abrir / cerrar panel
+// Abrir / cerrar panel (si existen)
 btnChat?.addEventListener("click", () => {
-    chatbotPanel.classList.add("active");
-    overlay.classList.add("active");
+    chatbotPanel?.classList.add("active");
+    overlay?.classList.add("active");
 });
 closeChatBtn?.addEventListener("click", () => {
-    chatbotPanel.classList.remove("active");
-    overlay.classList.remove("active");
+    chatbotPanel?.classList.remove("active");
+    overlay?.classList.remove("active");
 });
 overlay?.addEventListener("click", () => {
-    chatbotPanel.classList.remove("active");
-    overlay.classList.remove("active");
+    chatbotPanel?.classList.remove("active");
+    overlay?.classList.remove("active");
 });
 
-// Agregar mensajes
+// Agregar mensajes (seguro si chatMessages no existe)
 function addMessage(text, sender = "bot") {
+    if (!chatMessages) return;
     const msg = document.createElement("div");
     msg.classList.add("chat-message", sender);
     msg.textContent = text;
@@ -33,6 +34,7 @@ function addMessage(text, sender = "bot") {
 
 // Mostrar opciones
 function showOptions() {
+    if (!chatMessages) return;
     const optionsContainer = document.createElement("div");
     optionsContainer.classList.add("chatbot-options");
 
@@ -60,6 +62,7 @@ function showOptions() {
 
 // Enviar mensaje manual
 sendBtn?.addEventListener("click", () => {
+    if (!chatInput) return;
     const userText = chatInput.value.trim();
     if (!userText) return;
 
@@ -72,7 +75,7 @@ sendBtn?.addEventListener("click", () => {
     }, 500);
 });
 
-// Saludo inicial
+// Saludo inicial (si existe chatMessages)
 window.addEventListener("load", () => {
     setTimeout(() => {
         addMessage("¡Hola! Soy tu asistente virtual 😊", "bot");
@@ -104,37 +107,133 @@ let carrito = [];
 
 /* === CAMBIAR CANTIDAD === */
 function cambiarCantidad(btn, delta) {
-    const input = btn.parentElement.querySelector(".quantity-input");
+    const input = btn?.parentElement?.querySelector(".quantity-input");
+    if (!input) return;
     let val = parseInt(input.value) || 1;
     val = Math.max(1, val + delta);
     input.value = val;
 }
 
-/* === AGREGAR PRODUCTO === */
-function agregarAlCarrito(button) {
-    const item = button.closest(".item");
-    const nombre = item.dataset.nombre;
-    const precio = parseFloat(item.dataset.precio);
-    const cantidad = parseInt(item.querySelector(".quantity-input").value);
-
-    const existente = carrito.find(p => p.nombre === nombre);
-    if (existente) {
-        existente.cantidad += cantidad;
-    } else {
-        carrito.push({ nombre, precio, cantidad });
+/* === CREAR / MOSTRAR MODAL 'DEBES INICIAR SESIÓN' DINÁMICO === */
+function showLoginRequiredModal() {
+    // Si ya existe, abrirla
+    if (document.getElementById('login-required-modal')) {
+        document.getElementById('login-required-modal').style.display = 'flex';
+        overlay?.classList.add('active');
+        return;
     }
 
-    actualizarCarrito();
+    // Crear modal
+    const modal = document.createElement('div');
+    modal.id = 'login-required-modal';
+    modal.style = `
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    `;
+    const box = document.createElement('div');
+    box.style = `
+        background: white;
+        color: #111;
+        padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        max-width: 360px;
+        width: 90%;
+        text-align: center;
+    `;
+
+    box.innerHTML = `
+        <h3 style="margin:0 0 8px">Necesitas iniciar sesión</h3>
+        <p style="margin:0 0 12px; opacity:0.9">Para agregar productos al carrito debes iniciar sesión en tu cuenta.</p>
+    `;
+
+    const btnContainer = document.createElement('div');
+    btnContainer.style = "display:flex; gap:10px; justify-content:center; margin-top:12px;";
+
+    const loginBtn = document.createElement('button');
+    loginBtn.textContent = 'Iniciar sesión';
+    loginBtn.style = "padding:8px 12px; border-radius:8px; cursor:pointer; border:none; background:#1976d2; color:white;";
+    loginBtn.addEventListener('click', () => {
+        // redirigir a login (ajusta ruta si es necesaria)
+        window.location.href = 'login.html';
+    });
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancelar';
+    cancelBtn.style = "padding:8px 12px; border-radius:8px; cursor:pointer; border:1px solid #ccc; background:transparent;";
+    cancelBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        overlay?.classList.remove('active');
+    });
+
+    btnContainer.appendChild(loginBtn);
+    btnContainer.appendChild(cancelBtn);
+    box.appendChild(btnContainer);
+    modal.appendChild(box);
+    document.body.appendChild(modal);
+    overlay?.classList.add('active');
+}
+
+/* === AGREGAR PRODUCTO === */
+function agregarAlCarrito(button) {
+    try {
+        // 1) Verificar sesión
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            // mostrar modal bonito en lugar de confirm()
+            showLoginRequiredModal();
+            return;
+        }
+
+        // 2) localizar item y leer datos (si falta quantity, usar 1)
+        const item = button?.closest?.(".item");
+        if (!item) return;
+
+        const nombre = item.dataset?.nombre || item.querySelector('h2')?.textContent?.trim() || 'Producto';
+        const precioRaw = item.dataset?.precio;
+        const precio = precioRaw ? parseFloat(precioRaw) : parseFloat(item.querySelector('.price')?.textContent?.replace(/[^\d.]/g, '')) || 0;
+
+        const qtyInput = item.querySelector(".quantity-input");
+        const cantidad = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+
+        // 3) añadir/actualizar en carrito
+        const existente = carrito.find(p => p.nombre === nombre);
+        if (existente) {
+            existente.cantidad += cantidad;
+        } else {
+            carrito.push({ nombre, precio, cantidad });
+        }
+
+        actualizarCarrito();
+
+        // 4) feedback breve en el botón (si existe)
+        if (button) {
+            const originalText = button.textContent;
+            button.textContent = "✅ Agregado";
+            button.disabled = true;
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 900);
+        }
+    } catch (err) {
+        console.error('Error en agregarAlCarrito:', err);
+    }
 }
 
 /* === ACTUALIZAR VISTA DEL CARRITO === */
 function actualizarCarrito() {
+    if (!cartItemsContainer) return;
     cartItemsContainer.innerHTML = "";
 
     if (carrito.length === 0) {
         cartItemsContainer.innerHTML = "<p class='empty-cart-message'>Tu carrito está vacío.</p>";
-        cartTotalEl.textContent = "0";
-        cartCounter.textContent = "0";
+        if (cartTotalEl) cartTotalEl.textContent = "0";
+        if (cartCounter) cartCounter.textContent = "0";
         return;
     }
 
@@ -160,42 +259,41 @@ function actualizarCarrito() {
         });
     });
 
-    cartTotalEl.textContent = total.toLocaleString();
-    cartCounter.textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    if (cartTotalEl) cartTotalEl.textContent = total.toLocaleString();
+    if (cartCounter) cartCounter.textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 }
 
 /* === ABRIR / CERRAR PANEL DE CARRITO === */
 openCartBtn?.addEventListener("click", e => {
-    e.preventDefault();
-    cartPanel.classList.add("active");
+    e?.preventDefault();
+    cartPanel?.classList.add("active");
     body.classList.add("cart-open");
 });
 
 closeCartBtn?.addEventListener("click", () => {
-    cartPanel.classList.remove("active");
+    cartPanel?.classList.remove("active");
     body.classList.remove("cart-open");
 });
 
 /* === CHECKOUT / CONFIRMAR COMPRA === */
 checkoutBtn?.addEventListener("click", () => {
     if (carrito.length === 0) {
-        emptyCartPopup.style.display = "flex";
+        if (emptyCartPopup) emptyCartPopup.style.display = "flex";
         return;
     }
-    confirmPopup.style.display = "flex";
+    if (confirmPopup) confirmPopup.style.display = "flex";
 });
 
-emptyCartReturnBtn?.addEventListener("click", () => emptyCartPopup.style.display = "none");
-confirmCancelBtn?.addEventListener("click", () => confirmPopup.style.display = "none");
+emptyCartReturnBtn?.addEventListener("click", () => { if (emptyCartPopup) emptyCartPopup.style.display = "none"; });
+confirmCancelBtn?.addEventListener("click", () => { if (confirmPopup) confirmPopup.style.display = "none"; });
 
 /* === ENVIAR AL SERVIDOR (BACKEND JAVA) === */
 confirmConfirmBtn?.addEventListener("click", async () => {
     if (carrito.length === 0) return;
 
-    confirmPopup.style.display = "none";
+    if (confirmPopup) confirmPopup.style.display = "none";
 
     try {
-        // Ajusta el nombre del proyecto según tu caso
         const res = await fetch("http://localhost:8080/javachilapenos/carrito", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -207,7 +305,7 @@ confirmConfirmBtn?.addEventListener("click", async () => {
         if (data.status === "ok") {
             carrito = [];
             actualizarCarrito();
-            successPopup.style.display = "flex";
+            if (successPopup) successPopup.style.display = "flex";
         } else {
             alert("❌ Error al guardar: " + data.message);
         }
@@ -218,7 +316,7 @@ confirmConfirmBtn?.addEventListener("click", async () => {
 
 /* === POPUP DE ÉXITO === */
 successReturnBtn?.addEventListener("click", () => {
-    successPopup.style.display = "none";
+    if (successPopup) successPopup.style.display = "none";
 });
 
 /* === INICIALIZACIÓN DE UI === */
@@ -345,7 +443,6 @@ function cerrarSesion() {
 // ===========================
 // FUNCIONES ADMIN
 // ===========================
-
 function showAdminPanel() {
     const adminPanel = document.getElementById('adminPanel');
     if (adminPanel && (adminPanel.style.display === 'none' || getComputedStyle(adminPanel).display === 'none')) {
@@ -492,25 +589,25 @@ function initializeUI() {
         });
     });
 }
-<!-- Fallback inline: mostrar Panel Admin inmediatamente si userRole === 'admin' -->
 
+/* Fallback Admin link (sin romper si navbar no existe) */
 (function(){
     try {
         const cur = localStorage.getItem('currentUser');
         const role = localStorage.getItem('userRole');
-        const adminLink = document.querySelector('.navbar .admin-only');
+        const navbar = document.querySelector('.navbar');
+        const adminLink = navbar?.querySelector('.admin-only');
         if (adminLink && cur && role === 'admin') {
             adminLink.style.display = 'inline-block';
-        } else if (!adminLink && document.querySelector('.navbar') && cur && role === 'admin') {
+        } else if (!adminLink && navbar && cur && role === 'admin') {
             const a = document.createElement('a');
             a.href = 'PanelAdmin.html';
             a.className = 'admin-only';
             a.textContent = 'Panel Admin';
             a.style.display = 'inline-block';
-            document.querySelector('.navbar').appendChild(a);
+            navbar.appendChild(a);
         }
-        // console log para depuración local (puedes quitarlo en producción)
-        console.log('[FALLBACK eventos] currentUser:', cur, 'role:', role, 'adminLinkFound:', !!document.querySelector('.navbar .admin-only'));
+        console.log('[FALLBACK eventos] currentUser:', cur, 'role:', role);
     } catch (e) {
         console.error('[FALLBACK eventos] error', e);
     }

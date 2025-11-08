@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/prueba.css">
     <!-- Iconos (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 <body>
 
@@ -28,260 +27,112 @@
 
     <div class="menu-items">
 
+        <!-- 🔸 Producto -->
         <div class="item" data-nombre="Carne Tampiqueña" data-precio="27900">
             <img src="../imagenes/Platosfuertes/CarneTampiqueña.PNG" alt="Carne Tampiqueña">
             <h2>Carne Tampiqueña</h2>
             <p>$27.900 - Lomo fino de res a la plancha cubierto con rajas y acompañado con arroz mexicano frijol negro y papa americana.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Pollo al Mole" data-precio="28400">
             <img src="../imagenes/Platosfuertes/PolloalMole.PNG" alt="Pollo al Mole">
             <h2>Pollo al Mole</h2>
-            <p>$28.400 - Pollo desmechado con salsa de mole acompañado con (5) tortillas de maíz o (4) de harina de trigo, lechuga, sour cream, guacamole, pico e gallo, frijol refrito y queso. (Este plato es ligeramente picante).</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$28.400 - Pollo desmechado con salsa de mole acompañado con tortillas, lechuga, guacamole, pico e gallo, frijol refrito y queso.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Costillitas BBQ" data-precio="27500">
             <img src="../imagenes/Platosfuertes/CostillitasBBQ.PNG" alt="Costillitas BBQ">
             <h2>Costillitas BBQ</h2>
             <p>$27.500 - Costillitas de cerdo cubiertas con salsa BBQ, acompañadas con arroz mexicano frijol negro y papa americana.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Enchiladas" data-precio="24400">
             <img src="../imagenes/Platosfuertes/Enchiladas.PNG" alt="Enchiladas">
             <h2>Enchiladas</h2>
-            <p>$24.400 - 2 Tortillas medianas enrolladas y rellenas con queso carne, queso, pollo bañadas en salsa ranchera y queso fundido.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$24.400 - 2 Tortillas rellenas con carne o pollo, bañadas en salsa ranchera y queso fundido.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Flautas" data-precio="24000">
             <img src="../imagenes/Platosfuertes/Flautas.PNG" alt="Flautas">
             <h2>Flautas</h2>
-            <p>$24.000 - 3 Tortillas enrolladas y rellenas de carne de res, cerdo y pollo con un toque de queso acompañadas con lechuga, guacamole, sour cream y pico e gallo.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$24.000 - 3 Tortillas enrolladas y rellenas de carne de res, cerdo y pollo con guacamole y pico e gallo.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Toro Texano" data-precio="25400">
             <img src="../imagenes/Platosfuertes/ToroTexano.PNG" alt="Toro Texano">
             <h2>Toro Texano</h2>
-            <p>$25.400 - Tortilla grande rellena de arroz mexicano, frijol refrito, rajas, carne y pollo desmechado, acompañado de ensalada chorizos y nachos cubiertos con frijol refrito y queso.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$25.400 - Tortilla rellena con arroz mexicano, frijol refrito, rajas, carne y pollo, con ensalada y nachos.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Variedad Chilapeña" data-precio="70400">
             <img src="../imagenes/Platosfuertes/VariedadChilapeña.PNG" alt="Variedad Chilapeña">
             <h2>Variedad Chilapeña</h2>
-            <p>$70.400 - 2 Quesadillas, 2 tacos mixtos, 2 enchiladas, 2 fajitas y 1/2 bandeja de nachos. Ideal para compartir en familia o en pareja.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$70.400 - 2 Quesadillas, 2 tacos mixtos, 2 enchiladas, 2 fajitas y 1/2 bandeja de nachos.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="1/2 Variedad Chilapeña" data-precio="39000">
             <img src="../imagenes/Platosfuertes/1.2 VariedadChilapeña.PNG" alt="1/2 Variedad Chilapeña">
             <h2>1/2 Variedad Chilapeña</h2>
             <p>$39.000 - 1 Quesadilla, 1 taco mixto, 1 enchilada, 1 fajita y personal de nachos.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Steak Ranchero" data-precio="27900">
             <img src="../imagenes/Platosfuertes/SteakRanchero.PNG" alt="Steak Ranchero">
             <h2>Steak Ranchero</h2>
-            <p>$27.900 - Lomo fino de res bañado en salsa ranchera, queso fundido, acompañado con ensalada, arroz mexicano y papa americana.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$27.900 - Lomo fino de res bañado en salsa ranchera, queso fundido y acompañado con ensalada.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Pollo Mandarina ó Miel Mostaza" data-precio="24500">
             <img src="../imagenes/Platosfuertes/Pollomandarinaomielmostaza.PNG" alt="Pollo Mandarina ó Miel Mostaza">
             <h2>Pollo Mandarina ó Miel Mostaza</h2>
-            <p>$24.500 - Pechuga a la plancha bañada en salsa de mandarina o miel mostaza, acompañada con arroz mexicano, frijol negro y papa americana.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$24.500 - Pechuga bañada en salsa de mandarina o miel mostaza, con arroz mexicano y papa americana.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Carnitas de Cerdo" data-precio="28000">
             <img src="../imagenes/Platosfuertes/CarnitasdeCerdo.PNG" alt="Carnitas de Cerdo">
             <h2>Carnitas de Cerdo</h2>
-            <p>$28.000 - Carne de cerdo picada acompañada con (5) tortillas de maíz ó (4) de harina de trigo, lechuga, sour cream, guacamole, pico e gallo, frijol refrito y queso.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$28.000 - Carne de cerdo picada acompañada con tortillas, lechuga, guacamole y queso.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Fajitas Mixtas" data-precio="25400">
             <img src="../imagenes/Platosfuertes/FajitasMixtas.PNG" alt="Fajitas Mixtas">
             <h2>Fajitas Mixtas</h2>
-            <p>$25.400 - 2 Tortillas grandes enrolladas rellenas con carne, pollo y rajas acompañadas de ensalada, lechuga, guacamole, pico e gallo y sour cream.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$25.400 - 2 Tortillas grandes rellenas con carne, pollo y rajas, con ensalada y guacamole.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Burro Super" data-precio="23900">
             <img src="../imagenes/Platosfuertes/Burritosuper.PNG" alt="Burro Super">
             <h2>Burro Super</h2>
-            <p>$23.900 - 1 Tortilla cubierta con frijol refrito, arroz mexicano, carne, pollo, chorizo, lechuga, rajas, guacamole, pico e gallo y sour cream.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$23.900 - Tortilla con frijol refrito, arroz, carne, pollo, chorizo, lechuga, guacamole y sour cream.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Burro Mini" data-precio="21400">
             <img src="../imagenes/Platosfuertes/BurroMini.PNG" alt="Burro Mini">
             <h2>Burro Mini</h2>
-            <p>$21.400 - 1 Tortilla cubierta con frijol refrito, arroz mexicano, carne, pollo, chorizo, lechuga, rajas, guacamole, pico e gallo y sour cream.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$21.400 - Tortilla con frijol refrito, arroz, carne, pollo, chorizo, lechuga y sour cream.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Chimichangas" data-precio="25900">
             <img src="../imagenes/Platosfuertes/Chimichangas.PNG" alt="Chimichangas">
             <h2>Chimichangas</h2>
-            <p>$25.900 - 2 Tortillas grandes rellenas de queso carne, queso pollo, cubiertas de guacamole, sour cream, pico e gallo, acompañadas con arroz mexicano, frijol negro y papa americana.</p>
-            <div class="purchase-panel">
-                <label class="quantity-label">Cantidad:</label>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, -1)">-</button>
-                    <input type="text" value="1" min="1" inputmode="numeric" pattern="\d*" class="quantity-input">
-                    <button class="quantity-btn" onclick="cambiarCantidad(this, 1)">+</button>
-                </div>
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <p>$25.900 - 2 Tortillas rellenas de carne o pollo, cubiertas de guacamole, pico e gallo y sour cream.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
+
     </div>
 </main>
 
@@ -291,7 +142,7 @@
         <div class="footer-logo">
             <img src="../imagenes/varios/logo.png" alt="logo chilapeños">
             <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
-                Pide tu domicilio en nuestro WhatsApp o llamanos al <br><strong>314 4230347</strong></p>
+                Pide tu domicilio en nuestro WhatsApp o llámanos al <br><strong>314 4230347</strong></p>
         </div>
 
         <div class="footer-info">
@@ -301,19 +152,21 @@
             <p>Domingos: 1:00 p.m – 9:00 p.m</p>
 
             <h3>Métodos de pago</h3>
-            <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
-            <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
+            <p><strong>En restaurante:</strong> Efectivo, tarjetas, Nequi / Daviplata</p>
+            <p><strong>Domicilios:</strong> Efectivo o plataformas digitales</p>
         </div>
 
         <div class="footer-contact">
             <h3>Contáctanos</h3>
-            <p>📍 Normandía sobre la CAlLE 63 #78-25, Bogotá</p>
-            <p>📞 Domicilios: 314 4230347 </p>
+            <p>📍 Normandía sobre la Calle 63 #78-25, Bogotá</p>
+            <p>📞 Domicilios: 314 4230347</p>
         </div>
     </div>
 
-    <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
+    <p class="footer-copy">software3 | Copyright © 2025 
+        <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
+
 <!-- Carrito lateral -->
 <div id="cart-panel">
     <div class="cart-header">
@@ -330,66 +183,21 @@
     </div>
 </div>
 
-<!-- Popup Confirmación de pago -->
-<div id="payment-confirmation-popup" class="popup">
-    <div class="popup-content">
-        <h3>¿Seguro que deseas pagar?</h3>
-        <div class="popup-buttons">
-            <button class="confirm-payment-btn">Sí, pagar</button>
-            <button class="cancel-payment-btn">Cancelar</button>
-        </div>
-    </div>
-</div>
-
-<!-- Popup Pago exitoso -->
-<div id="payment-success-popup" class="popup">
-    <div class="popup-content">
-        <h3>¡Pago Exitoso!</h3>
-        <p>Tu pedido ha sido recibido y será procesado.</p>
-        <button class="return-btn">Volver al menú</button>
-    </div>
-</div>
-
-<!-- Popup Carrito vacío -->
-<div id="empty-cart-popup" class="popup">
-    <div class="popup-content">
-        <h3>Carrito Vacío</h3>
-        <p>No tienes nada en el carrito. Agrega productos antes de pagar.</p>
-        <button class="return-btn">Cerrar</button>
-    </div>
-</div>
-<!-- 🔘 Botones flotantes (sin Notificaciones) -->
+<!-- Botones flotantes -->
 <div class="floating-buttons">
-    <!-- Inicio de sesión -->
-    <a href="../login.html" class="btn-login" title="Iniciar Sesión">
-        <i class="fas fa-user"></i>
-    </a>
-
-    <!-- WhatsApp -->
-    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Botón flotante para abrir chatbot -->
-    <button class="btn-chat" title="ChatBot">
-        <i class="fas fa-robot"></i>
-    </button>
-
-    <!-- 🌙 Modo oscuro -->
-    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
-        <i class="fas fa-moon"></i>
-    </button>
+    <a href="../login.html" class="btn-login" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
 </div>
 
-<!-- Panel del ChatBot -->
+<!-- ChatBot -->
 <div id="chatbot-panel">
     <div class="chatbot-header">
         <h3>🤖 ChatBot</h3>
         <button id="close-chatbot">&times;</button>
     </div>
-    <div class="chatbot-messages" id="chatbot-messages">
-        <!-- Los mensajes se insertan por JS -->
-    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
     <div class="chatbot-footer">
         <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
         <button id="chatbot-send">Enviar</button>
@@ -397,7 +205,49 @@
 </div>
 <div id="overlay"></div>
 
-<!-- Scripts -->
 <script src="../javascript/js.js"></script>
+<!-- Popup: iniciar sesión para usar carrito -->
+<div id="login-required-popup" class="popup-overlay" style="display:none;">
+  <div class="popup-card">
+    <h2>Inicia sesión para usar el carrito</h2>
+    <p>Debes iniciar sesión como cliente para añadir productos y ver el carrito.</p>
+    <div class="popup-actions">
+      <button id="close-login-popup" class="btn-cancel">Cerrar</button>
+      <button id="go-login-btn" class="btn-login">Iniciar sesión</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.popup-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+}
+.popup-card {
+  background: #fff; border-radius: 12px; padding: 25px 35px; max-width: 500px; width: 90%;
+  text-align: left; box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+.popup-card h2 {
+  font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: #222;
+}
+.popup-card p {
+  color: #444; margin-bottom: 25px;
+}
+.popup-actions {
+  display: flex; justify-content: flex-end; gap: 10px;
+}
+.btn-cancel {
+  background: #eee; color: #333; border: none; padding: 10px 16px; border-radius: 8px;
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-cancel:hover { background: #ddd; }
+.btn-login {
+  background: #ff6600; color: #fff; border: none; padding: 10px 16px; border-radius: 8px;
+  cursor: pointer; font-weight: 600; transition: background 0.2s;
+}
+.btn-login:hover { background: #e05500; }
+</style>
+
 </body>
 </html>
