@@ -2,11 +2,9 @@
 window.addEventListener('load', () => {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
-        // Mostrar opción para continuar con la sesión actual o cambiar de cuenta
         showSessionAlert();
     }
 
-    // Crear cuentas demo si no existen
     createDemoAccounts();
 });
 
@@ -83,6 +81,10 @@ function createDemoAccounts() {
 
 function showAlert(message, type = 'error') {
     const alertContainer = document.getElementById('alertContainer');
+    
+    // 🔧 ARREGLO: Limpiar alertas anteriores antes de mostrar una nueva
+    alertContainer.innerHTML = '';
+    
     alertContainer.innerHTML = `
         <div class="alert alert-${type}">
           <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'info-circle'}"></i>
@@ -90,13 +92,11 @@ function showAlert(message, type = 'error') {
         </div>
       `;
 
-    // Auto-hide after 8 seconds for success messages with links
     if (type === 'success') {
         setTimeout(() => {
             alertContainer.innerHTML = '';
         }, 8000);
     } else {
-        // Auto-hide after 5 seconds for other messages
         setTimeout(() => {
             alertContainer.innerHTML = '';
         }, 5000);
@@ -104,24 +104,23 @@ function showAlert(message, type = 'error') {
 }
 
 function quickLogin(email, password, role) {
-    // Cambiar el switch al rol correcto
     if (role === 'admin') {
         btnAdmin.click();
     } else {
         btnCliente.click();
     }
 
-    // Llenar los campos
     document.getElementById('email').value = email;
     document.getElementById('password').value = password;
 
-    // Simular submit
     setTimeout(() => {
         loginForm.dispatchEvent(new Event('submit'));
     }, 300);
 }
 
-// Evento de login
+// ========================================
+// EVENTO DE LOGIN (MODIFICADO)
+// ========================================
 loginForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -141,7 +140,6 @@ loginForm.addEventListener("submit", function(e) {
         return;
     }
 
-    // Verificar rol seleccionado en el switch
     const selectedRole = btnAdmin.classList.contains("active") ? "admin" : "cliente";
 
     if (user.role !== selectedRole) {
@@ -154,29 +152,54 @@ loginForm.addEventListener("submit", function(e) {
 
     showAlert("✅ ¡Inicio de sesión exitoso! Redirigiendo...", 'success');
 
-    // Redirigir SIEMPRE a Principal.html después de un breve delay
+    // Verificar si hay una página guardada para volver
     setTimeout(() => {
-        window.location.href = "Principal.html";
+        const returnTo = sessionStorage.getItem('returnTo');
+        
+        if (returnTo) {
+            sessionStorage.removeItem('returnTo');
+            window.location.href = returnTo;
+        } else {
+            window.location.href = "Principal.html";
+        }
     }, 1500);
 });
 
-// Abrir modal de crear cuenta (usa el rol actual del switch)
-crearCuentaLink.addEventListener("click", () => {
+// Abrir modal de crear cuenta
+crearCuentaLink.addEventListener("click", (e) => {
+    e.preventDefault(); // 🔧 ARREGLO: Prevenir comportamiento por defecto
+    
+    // 🔧 ARREGLO: Limpiar alertas antes de abrir el modal
+    const alertContainer = document.getElementById('alertContainer');
+    if (alertContainer) {
+        alertContainer.innerHTML = '';
+    }
+    
     const role = btnAdmin.classList.contains("active") ? "admin" : "cliente";
     selectedRoleInput.value = role.charAt(0).toUpperCase() + role.slice(1);
     newEmail.value = "";
     newPassword.value = "";
     modalOverlay.style.display = "flex";
-    newEmail.focus();
+    
+    // 🔧 ARREGLO: Dar tiempo para que se renderice el modal antes de hacer focus
+    setTimeout(() => {
+        newEmail.focus();
+    }, 100);
 });
 
 // Cancelar creación
 cancelCreate.addEventListener("click", (e) => {
     e.preventDefault();
     modalOverlay.style.display = "none";
+    
+    // 🔧 ARREGLO: Limpiar campos del modal
+    newEmail.value = "";
+    newPassword.value = "";
 });
 
-// Confirmar creación -> guarda cuenta y ENTRA automáticamente
+// ========================================
+// CONFIRMAR CREACIÓN DE CUENTA (MODIFICADO)
+// ========================================
 confirmCreate.addEventListener("click", (e) => {
     e.preventDefault();
     const emailVal = newEmail.value.trim();
@@ -205,12 +228,25 @@ confirmCreate.addEventListener("click", (e) => {
     // Guardar sesión completa
     setUserSession(emailVal, roleVal);
 
+    // 🔧 ARREGLO: Cerrar modal ANTES de mostrar la alerta de éxito
     modalOverlay.style.display = "none";
+    
+    // Limpiar campos
+    newEmail.value = "";
+    newPassword.value = "";
+
     showAlert("✅ ¡Cuenta creada exitosamente! Redirigiendo...", 'success');
 
-    // Redirigir SIEMPRE a Principal.html
+    // Verificar si hay una página guardada para volver
     setTimeout(() => {
-        window.location.href = "Principal.html";
+        const returnTo = sessionStorage.getItem('returnTo');
+        
+        if (returnTo) {
+            sessionStorage.removeItem('returnTo');
+            window.location.href = returnTo;
+        } else {
+            window.location.href = "Principal.html";
+        }
     }, 1500);
 });
 
@@ -218,11 +254,16 @@ confirmCreate.addEventListener("click", (e) => {
 modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) {
         modalOverlay.style.display = "none";
+        
+        // 🔧 ARREGLO: Limpiar campos al cerrar
+        newEmail.value = "";
+        newPassword.value = "";
     }
 });
 
 // Link 'olvidaste contraseña'
-document.getElementById("forgotLink").addEventListener("click", () => {
+document.getElementById("forgotLink")?.addEventListener("click", (e) => {
+    e.preventDefault();
     const mail = prompt("Ingresa tu correo para enviar instrucciones de recuperación:");
     if (mail) {
         showAlert("Si el correo existe en nuestro sistema, recibirás las instrucciones de recuperación.", 'success');
@@ -231,7 +272,6 @@ document.getElementById("forgotLink").addEventListener("click", () => {
 
 // Función para volver sin autenticar (modo invitado)
 function goBackWithoutAuth() {
-    // Simplemente redirigir sin preguntar
     window.location.href = 'Principal.html';
 }
 

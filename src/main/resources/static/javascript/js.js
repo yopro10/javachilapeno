@@ -1,28 +1,21 @@
 /* === MANEJAR RESPUESTAS CHATBOT === */
 const btnChat = document.querySelector(".btn-chat");
 const chatbotPanel = document.getElementById("chatbot-panel");
-const overlay = document.getElementById("overlay"); // mismo overlay que carrito
 const closeChatBtn = document.getElementById("close-chatbot");
 
 const chatMessages = document.getElementById("chatbot-messages");
 const chatInput = document.getElementById("chatbot-input");
 const sendBtn = document.getElementById("chatbot-send");
 
-// Abrir / cerrar panel (si existen)
 btnChat?.addEventListener("click", () => {
     chatbotPanel?.classList.add("active");
-    overlay?.classList.add("active");
+    document.getElementById("overlay")?.classList.add("active");
 });
 closeChatBtn?.addEventListener("click", () => {
     chatbotPanel?.classList.remove("active");
-    overlay?.classList.remove("active");
-});
-overlay?.addEventListener("click", () => {
-    chatbotPanel?.classList.remove("active");
-    overlay?.classList.remove("active");
+    document.getElementById("overlay")?.classList.remove("active");
 });
 
-// Agregar mensajes (seguro si chatMessages no existe)
 function addMessage(text, sender = "bot") {
     if (!chatMessages) return;
     const msg = document.createElement("div");
@@ -32,7 +25,6 @@ function addMessage(text, sender = "bot") {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Mostrar opciones
 function showOptions() {
     if (!chatMessages) return;
     const optionsContainer = document.createElement("div");
@@ -60,7 +52,6 @@ function showOptions() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Enviar mensaje manual
 sendBtn?.addEventListener("click", () => {
     if (!chatInput) return;
     const userText = chatInput.value.trim();
@@ -75,24 +66,23 @@ sendBtn?.addEventListener("click", () => {
     }, 500);
 });
 
-// Saludo inicial (si existe chatMessages)
 window.addEventListener("load", () => {
     setTimeout(() => {
         addMessage("¡Hola! Soy tu asistente virtual 😊", "bot");
     }, 500);
 });
 
-/* === CARRITO DE COMPRAS === */
+/* === CARRITO DE COMPRAS MEJORADO (POR USUARIO) === */
 const body = document.body;
 const cartPanel = document.getElementById("cart-panel");
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartItemsContainer = document.getElementById("cart-items");
 const cartTotalEl = document.getElementById("cart-total");
-const cartCounter = document.querySelector(".cart-counter");
+const cartCounters = document.querySelectorAll(".cart-counter");
 const checkoutBtn = document.querySelector(".checkout-btn");
+const overlay = document.getElementById("overlay");
 
-/* === POPUPS === */
 const confirmPopup = document.getElementById("payment-confirmation-popup");
 const confirmCancelBtn = confirmPopup?.querySelector(".cancel-payment-btn");
 const confirmConfirmBtn = confirmPopup?.querySelector(".confirm-payment-btn");
@@ -103,70 +93,181 @@ const successReturnBtn = successPopup?.querySelector(".return-btn");
 const emptyCartPopup = document.getElementById("empty-cart-popup");
 const emptyCartReturnBtn = emptyCartPopup?.querySelector(".return-btn");
 
+// Variable global del carrito
 let carrito = [];
+
+// 🔑 FUNCIÓN PARA OBTENER LA CLAVE DEL CARRITO DEL USUARIO ACTUAL
+function getCartKey() {
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser ? `carrito_${currentUser}` : 'carrito_guest';
+}
+
+// Cargar carrito del usuario actual desde localStorage
+function cargarCarrito() {
+    const cartKey = getCartKey();
+    carrito = JSON.parse(localStorage.getItem(cartKey)) || [];
+    actualizarCarrito();
+}
+
+// Función para guardar el carrito del usuario actual
+function guardarCarrito() {
+    const cartKey = getCartKey();
+    localStorage.setItem(cartKey, JSON.stringify(carrito));
+}
+
+// 🧹 FUNCIÓN PARA LIMPIAR EL CARRITO AL CERRAR SESIÓN
+function limpiarCarritoUsuario() {
+    carrito = [];
+    guardarCarrito();
+    actualizarCarrito();
+}
+
+/* === INICIALIZAR SELECTORES DE CANTIDAD === */
+function initializeQuantitySelectors() {
+    const currentUser = localStorage.getItem('currentUser');
+    const userRole = localStorage.getItem('userRole');
+    
+    if (!currentUser || !userRole) return;
+    
+    document.querySelectorAll('.item').forEach(item => {
+        if (item.querySelector('.quantity-selector')) return;
+        
+        const selector = document.createElement('div');
+        selector.className = 'quantity-selector';
+        selector.innerHTML = `
+            <button class="quantity-btn minus-btn" onclick="cambiarCantidad(this, -1)">−</button>
+            <input type="number" class="quantity-input" value="1" min="1" max="99" readonly>
+            <button class="quantity-btn plus-btn" onclick="cambiarCantidad(this, 1)">+</button>
+        `;
+        
+        const addBtn = item.querySelector('.add-to-cart-btn');
+        if (addBtn) {
+            addBtn.parentNode.insertBefore(selector, addBtn);
+        }
+    });
+}
 
 /* === CAMBIAR CANTIDAD === */
 function cambiarCantidad(btn, delta) {
-    const input = btn?.parentElement?.querySelector(".quantity-input");
+    const input = btn.parentElement.querySelector(".quantity-input");
     if (!input) return;
+    
     let val = parseInt(input.value) || 1;
-    val = Math.max(1, val + delta);
+    val = Math.max(1, Math.min(99, val + delta));
     input.value = val;
+    
+    btn.style.transform = 'scale(0.9)';
+    setTimeout(() => {
+        btn.style.transform = 'scale(1)';
+    }, 100);
 }
 
-/* === CREAR / MOSTRAR MODAL 'DEBES INICIAR SESIÓN' DINÁMICO === */
+/* === FUNCIÓN PARA DETECTAR LA RUTA CORRECTA === */
+function getLoginPath() {
+    const currentPath = window.location.pathname;
+    
+    if (currentPath.includes('/opciones/') || 
+        currentPath.includes('/bebidas/') || 
+        currentPath.includes('/postres/')) {
+        return '../login.html';
+    }
+    
+    return 'login.html';
+}
+
+/* === MODAL 'DEBES INICIAR SESIÓN' === */
 function showLoginRequiredModal() {
-    // Si ya existe, abrirla
-    if (document.getElementById('login-required-modal')) {
-        document.getElementById('login-required-modal').style.display = 'flex';
-        overlay?.classList.add('active');
-        return;
+    const existingModal = document.getElementById('login-required-modal');
+    if (existingModal) {
+        existingModal.remove();
     }
 
-    // Crear modal
     const modal = document.createElement('div');
     modal.id = 'login-required-modal';
-    modal.style = `
+    modal.style.cssText = `
         position: fixed;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 9999;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
     `;
+
     const box = document.createElement('div');
-    box.style = `
+    box.style.cssText = `
         background: white;
         color: #111;
-        padding: 18px;
-        border-radius: 10px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        max-width: 360px;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        max-width: 420px;
         width: 90%;
         text-align: center;
+        animation: slideIn 0.3s ease;
     `;
 
     box.innerHTML = `
-        <h3 style="margin:0 0 8px">Necesitas iniciar sesión</h3>
-        <p style="margin:0 0 12px; opacity:0.9">Para agregar productos al carrito debes iniciar sesión en tu cuenta.</p>
+        <div style="font-size: 56px; margin-bottom: 20px;">🔒</div>
+        <h3 style="margin:0 0 12px; font-size: 22px; color: #111; font-weight: 700;">
+            ¡Espera un momento!
+        </h3>
+        <p style="margin:0 0 24px; opacity:0.75; font-size: 15px; line-height: 1.5;">
+            Para agregar productos a tu carrito necesitas iniciar sesión o crear una cuenta.
+        </p>
     `;
 
     const btnContainer = document.createElement('div');
-    btnContainer.style = "display:flex; gap:10px; justify-content:center; margin-top:12px;";
+    btnContainer.style.cssText = "display:flex; gap:12px; justify-content:center; margin-top:24px;";
 
     const loginBtn = document.createElement('button');
-    loginBtn.textContent = 'Iniciar sesión';
-    loginBtn.style = "padding:8px 12px; border-radius:8px; cursor:pointer; border:none; background:#1976d2; color:white;";
+    loginBtn.textContent = '🔐 Iniciar sesión';
+    loginBtn.style.cssText = `
+        padding: 14px 28px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: none;
+        background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        color: white;
+        font-weight: 700;
+        font-size: 15px;
+        transition: all 0.3s;
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        flex: 1;
+    `;
+    
+    loginBtn.onmouseover = () => {
+        loginBtn.style.transform = 'translateY(-3px)';
+        loginBtn.style.boxShadow = '0 8px 25px rgba(255, 107, 53, 0.5)';
+    };
+    loginBtn.onmouseout = () => {
+        loginBtn.style.transform = 'translateY(0)';
+        loginBtn.style.boxShadow = '0 6px 20px rgba(255, 107, 53, 0.4)';
+    };
+    
     loginBtn.addEventListener('click', () => {
-        // redirigir a login (ajusta ruta si es necesaria)
-        window.location.href = 'login.html';
+        sessionStorage.setItem('returnTo', window.location.pathname);
+        window.location.href = getLoginPath();
     });
 
     const cancelBtn = document.createElement('button');
     cancelBtn.textContent = 'Cancelar';
-    cancelBtn.style = "padding:8px 12px; border-radius:8px; cursor:pointer; border:1px solid #ccc; background:transparent;";
+    cancelBtn.style.cssText = `
+        padding: 14px 28px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid #e0e0e0;
+        background: transparent;
+        color: #666;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.3s;
+        flex: 0.7;
+    `;
+    
     cancelBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
+        modal.remove();
         overlay?.classList.remove('active');
     });
 
@@ -175,32 +276,36 @@ function showLoginRequiredModal() {
     box.appendChild(btnContainer);
     modal.appendChild(box);
     document.body.appendChild(modal);
-    overlay?.classList.add('active');
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+            overlay?.classList.remove('active');
+        }
+    });
 }
 
-/* === AGREGAR PRODUCTO === */
+/* === AGREGAR PRODUCTO AL CARRITO === */
 function agregarAlCarrito(button) {
     try {
-        // 1) Verificar sesión
         const currentUser = localStorage.getItem('currentUser');
-        if (!currentUser) {
-            // mostrar modal bonito en lugar de confirm()
+        const userRole = localStorage.getItem('userRole');
+        
+        if (!currentUser || !userRole) {
             showLoginRequiredModal();
             return;
         }
 
-        // 2) localizar item y leer datos (si falta quantity, usar 1)
         const item = button?.closest?.(".item");
         if (!item) return;
 
         const nombre = item.dataset?.nombre || item.querySelector('h2')?.textContent?.trim() || 'Producto';
         const precioRaw = item.dataset?.precio;
-        const precio = precioRaw ? parseFloat(precioRaw) : parseFloat(item.querySelector('.price')?.textContent?.replace(/[^\d.]/g, '')) || 0;
+        const precio = precioRaw ? parseFloat(precioRaw) : 0;
 
         const qtyInput = item.querySelector(".quantity-input");
         const cantidad = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
 
-        // 3) añadir/actualizar en carrito
         const existente = carrito.find(p => p.nombre === nombre);
         if (existente) {
             existente.cantidad += cantidad;
@@ -208,20 +313,32 @@ function agregarAlCarrito(button) {
             carrito.push({ nombre, precio, cantidad });
         }
 
+        guardarCarrito();
         actualizarCarrito();
 
-        // 4) feedback breve en el botón (si existe)
         if (button) {
             const originalText = button.textContent;
-            button.textContent = "✅ Agregado";
+            button.innerHTML = '✅ ¡Agregado!';
+            button.style.background = 'linear-gradient(135deg, #4caf50 0%, #45a049 100%)';
             button.disabled = true;
+            
+            if (qtyInput) qtyInput.value = 1;
+            
             setTimeout(() => {
                 button.textContent = originalText;
+                button.style.background = '';
                 button.disabled = false;
-            }, 900);
+            }, 1500);
         }
+        
+        cartCounters.forEach(counter => {
+            counter.classList.add('has-items');
+            setTimeout(() => counter.classList.remove('has-items'), 500);
+        });
+        
     } catch (err) {
         console.error('Error en agregarAlCarrito:', err);
+        alert('Ocurrió un error al agregar el producto.');
     }
 }
 
@@ -231,63 +348,126 @@ function actualizarCarrito() {
     cartItemsContainer.innerHTML = "";
 
     if (carrito.length === 0) {
-        cartItemsContainer.innerHTML = "<p class='empty-cart-message'>Tu carrito está vacío.</p>";
+        cartItemsContainer.innerHTML = `
+            <div class="empty-cart-message">
+                Tu carrito está vacío
+            </div>
+        `;
         if (cartTotalEl) cartTotalEl.textContent = "0";
-        if (cartCounter) cartCounter.textContent = "0";
+        cartCounters.forEach(counter => counter.textContent = "0");
         return;
     }
 
     let total = 0;
-    carrito.forEach(item => {
+    carrito.forEach((item, index) => {
         total += item.precio * item.cantidad;
 
         const div = document.createElement("div");
         div.className = "cart-item";
+        div.style.animationDelay = `${index * 0.05}s`;
         div.innerHTML = `
-            <span>${item.nombre} x${item.cantidad}</span>
-            <span>$${(item.precio * item.cantidad).toLocaleString()}</span>
-            <button class="remove-item-btn" data-nombre="${item.nombre}">✖</button>
+            <div class="cart-item-info">
+                <div class="cart-item-name">${item.nombre}</div>
+                <div class="cart-item-quantity">
+                    <button onclick="cambiarCantidadCarrito('${item.nombre}', -1)">−</button>
+                    <span>${item.cantidad}</span>
+                    <button onclick="cambiarCantidadCarrito('${item.nombre}', 1)">+</button>
+                </div>
+                <div class="cart-item-price">$${(item.precio * item.cantidad).toLocaleString()}</div>
+            </div>
+            <button class="remove-item-btn" onclick="eliminarDelCarrito('${item.nombre}')" title="Eliminar">✖</button>
         `;
         cartItemsContainer.appendChild(div);
     });
 
-    // Botones de eliminar
-    cartItemsContainer.querySelectorAll(".remove-item-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            carrito = carrito.filter(p => p.nombre !== btn.dataset.nombre);
-            actualizarCarrito();
-        });
-    });
-
     if (cartTotalEl) cartTotalEl.textContent = total.toLocaleString();
-    if (cartCounter) cartCounter.textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    cartCounters.forEach(counter => counter.textContent = totalItems);
 }
 
-/* === ABRIR / CERRAR PANEL DE CARRITO === */
+/* === CAMBIAR CANTIDAD EN EL CARRITO === */
+function cambiarCantidadCarrito(nombre, delta) {
+    const item = carrito.find(p => p.nombre === nombre);
+    if (!item) return;
+    
+    item.cantidad += delta;
+    
+    if (item.cantidad <= 0) {
+        carrito = carrito.filter(p => p.nombre !== nombre);
+    }
+    
+    guardarCarrito();
+    actualizarCarrito();
+}
+
+/* === ELIMINAR DEL CARRITO === */
+function eliminarDelCarrito(nombre) {
+    carrito = carrito.filter(p => p.nombre !== nombre);
+    guardarCarrito();
+    actualizarCarrito();
+}
+
+/* === ABRIR/CERRAR CARRITO === */
 openCartBtn?.addEventListener("click", e => {
     e?.preventDefault();
+    
+    const currentUser = localStorage.getItem('currentUser');
+    const userRole = localStorage.getItem('userRole');
+    
+    if (!currentUser || !userRole) {
+        showLoginRequiredModal();
+        return;
+    }
+    
     cartPanel?.classList.add("active");
-    body.classList.add("cart-open");
+    overlay?.classList.add("active");
 });
 
 closeCartBtn?.addEventListener("click", () => {
     cartPanel?.classList.remove("active");
-    body.classList.remove("cart-open");
+    overlay?.classList.remove("active");
 });
 
-/* === CHECKOUT / CONFIRMAR COMPRA === */
+overlay?.addEventListener("click", () => {
+    cartPanel?.classList.remove("active");
+    overlay?.classList.remove("active");
+    chatbotPanel?.classList.remove('active');
+});
+
+/* === CHECKOUT === */
 checkoutBtn?.addEventListener("click", () => {
-    if (carrito.length === 0) {
-        if (emptyCartPopup) emptyCartPopup.style.display = "flex";
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        showLoginRequiredModal();
         return;
     }
-    if (confirmPopup) confirmPopup.style.display = "flex";
+    
+    if (carrito.length === 0) {
+        alert('Tu carrito está vacío');
+        return;
+    }
+    
+    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+    const mensaje = `¡Pedido confirmado!\n\nTotal: $${total.toLocaleString()}\n\nGracias por tu compra.`;
+    
+    if (confirm(mensaje + '\n\n¿Deseas proceder con el pago?')) {
+        carrito = [];
+        guardarCarrito();
+        actualizarCarrito();
+        cartPanel?.classList.remove("active");
+        overlay?.classList.remove("active");
+        alert('¡Pedido procesado exitosamente! 🎉');
+    }
 });
 
-emptyCartReturnBtn?.addEventListener("click", () => { if (emptyCartPopup) emptyCartPopup.style.display = "none"; });
-confirmCancelBtn?.addEventListener("click", () => { if (confirmPopup) confirmPopup.style.display = "none"; });
+emptyCartReturnBtn?.addEventListener("click", () => { 
+    if (emptyCartPopup) emptyCartPopup.style.display = "none"; 
+});
 
-/* === ENVIAR AL SERVIDOR (BACKEND JAVA) === */
+confirmCancelBtn?.addEventListener("click", () => { 
+    if (confirmPopup) confirmPopup.style.display = "none"; 
+});
+
 confirmConfirmBtn?.addEventListener("click", async () => {
     if (carrito.length === 0) return;
 
@@ -304,6 +484,7 @@ confirmConfirmBtn?.addEventListener("click", async () => {
 
         if (data.status === "ok") {
             carrito = [];
+            guardarCarrito();
             actualizarCarrito();
             if (successPopup) successPopup.style.display = "flex";
         } else {
@@ -314,19 +495,28 @@ confirmConfirmBtn?.addEventListener("click", async () => {
     }
 });
 
-/* === POPUP DE ÉXITO === */
 successReturnBtn?.addEventListener("click", () => {
     if (successPopup) successPopup.style.display = "none";
 });
 
-/* === INICIALIZACIÓN DE UI === */
+/* === INICIALIZACIÓN === */
 window.addEventListener("DOMContentLoaded", () => {
     if (confirmPopup) confirmPopup.style.display = "none";
     if (successPopup) successPopup.style.display = "none";
     if (emptyCartPopup) emptyCartPopup.style.display = "none";
 
+    // 🔑 CARGAR CARRITO DEL USUARIO ACTUAL
+    cargarCarrito();
+    
+    setTimeout(() => {
+        initializeQuantitySelectors();
+    }, 100);
+    
     if (typeof checkAuthentication === "function") checkAuthentication();
     if (typeof initializeUI === "function") initializeUI();
+    
+    // Inicializar scroll suave al menú
+    initializeScrollToMenu();
 });
 
 // ===============================
@@ -338,8 +528,12 @@ function checkAuthentication() {
     const userRole = localStorage.getItem('userRole');
     if (currentUser && userRole) {
         setupUserInterface(currentUser, userRole);
+        // 🔑 CARGAR CARRITO AL INICIAR SESIÓN
+        cargarCarrito();
     } else {
         setupGuestInterface();
+        // 🧹 LIMPIAR CARRITO SI NO HAY SESIÓN
+        limpiarCarritoUsuario();
     }
 }
 
@@ -381,6 +575,8 @@ function setupUserInterface(userEmail, userRole) {
     } else {
         setupClienteInterface(userEmail);
     }
+    
+    initializeQuantitySelectors();
 }
 
 function setupClienteInterface(userEmail) {
@@ -415,9 +611,7 @@ function setupAdminInterface(userEmail) {
 function showClientePanel() {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
-        if (confirm('Necesitas iniciar sesión para acceder a tu cuenta personal. ¿Quieres iniciar sesión ahora?')) {
-            window.location.href = 'login.html';
-        }
+        showLoginRequiredModal();
         return;
     }
     alert('Panel de cliente - Aquí podrías mostrar pedidos, favoritos, etc.');
@@ -426,18 +620,19 @@ function showClientePanel() {
 function requireAuth(callback) {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
-        if (confirm('Esta función requiere iniciar sesión. ¿Quieres iniciar sesión ahora?')) {
-            window.location.href = 'login.html';
-        }
+        showLoginRequiredModal();
         return false;
     }
     return callback ? callback() : true;
 }
 
 function cerrarSesion() {
+    // ℹ️ El carrito del usuario se mantiene guardado para cuando vuelva a iniciar sesión
+    // NO limpiamos el carrito, solo cerramos la sesión
+    
     localStorage.removeItem('currentUser');
     localStorage.removeItem('userRole');
-    window.location.href = 'login.html';
+    window.location.href = getLoginPath();
 }
 
 // ===========================
@@ -520,10 +715,10 @@ function showReports() {
     `;
 }
 
-// Auxiliares admin
 function getUsers() {
     return JSON.parse(localStorage.getItem("usuarios")) || [];
 }
+
 function clearAllUsers() {
     if (confirm('¿Estás seguro de eliminar todos los usuarios? Esta acción no se puede deshacer.')) {
         localStorage.removeItem("usuarios");
@@ -531,6 +726,7 @@ function clearAllUsers() {
         toggleUsersList();
     }
 }
+
 function exportData() {
     const users = getUsers();
     const dataStr = JSON.stringify(users, null, 2);
@@ -541,6 +737,7 @@ function exportData() {
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
 }
+
 function showSystemInfo() {
     const adminContent = document.getElementById('adminContent');
     adminContent.innerHTML = `
@@ -590,7 +787,66 @@ function initializeUI() {
     });
 }
 
-/* Fallback Admin link (sin romper si navbar no existe) */
+// ===========================
+// SCROLL SUAVE AL MENÚ (VELOCIDAD PERSONALIZADA)
+// ===========================
+function initializeScrollToMenu() {
+    const scrollToMenuBtn = document.getElementById('scrollToMenu');
+    const categoriasSection = document.getElementById('categorias');
+    
+    if (scrollToMenuBtn && categoriasSection) {
+        scrollToMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Obtener la altura de la navbar para ajustar el scroll
+            const navbar = document.querySelector('.navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 0;
+            
+            // Calcular la posición del elemento
+            const targetPosition = categoriasSection.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = targetPosition - navbarHeight - 20; // 20px de margen adicional
+            
+            // Scroll suave con velocidad personalizada
+            smoothScrollTo(offsetPosition, 1500); // 1500ms = 1.5 segundos (más lento)
+            
+            // Animación visual en el botón al hacer clic
+            scrollToMenuBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                scrollToMenuBtn.style.transform = 'scale(1)';
+            }, 150);
+        });
+    }
+}
+
+// Función para scroll suave personalizado
+function smoothScrollTo(targetPosition, duration) {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+    
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        // Función de suavizado (easeInOutCubic)
+        const ease = progress < 0.5 
+            ? 4 * progress * progress * progress 
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        
+        window.scrollTo(0, startPosition + distance * ease);
+        
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+    
+    requestAnimationFrame(animation);
+}
+
+// ===========================
+// FALLBACK: Admin link en navbar
+// ===========================
 (function(){
     try {
         const cur = localStorage.getItem('currentUser');
@@ -607,7 +863,6 @@ function initializeUI() {
             a.style.display = 'inline-block';
             navbar.appendChild(a);
         }
-        console.log('[FALLBACK eventos] currentUser:', cur, 'role:', role);
     } catch (e) {
         console.error('[FALLBACK eventos] error', e);
     }

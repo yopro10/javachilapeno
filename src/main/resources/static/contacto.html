@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contáctanos | Chilapeños</title>
   <link rel="stylesheet" href="css/prueba.css">
-    <link rel="stylesheet" href="css/contacto.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <link rel="stylesheet" href="css/contacto.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 <body>
@@ -19,6 +18,10 @@
   <a href="contacto.html" class="active">Contáctanos</a>
   <!-- PANEL ADMIN: presente en todas las páginas -->
   <a href="PanelAdmin.html" class="admin-only">Panel Admin</a>
+  <!-- 🛒 BOTÓN DEL CARRITO -->
+  <a href="#" id="open-cart-btn" class="cart-icon-container">
+    🛒 <span class="cart-counter">0</span>
+  </a>
 </nav>
 
 <!-- Banner -->
@@ -105,6 +108,21 @@
   <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
 
+<!-- ✨ CARRITO LATERAL -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-footer">
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
+    </div>
+</div>
+
 <!-- Botones flotantes -->
 <div class="floating-buttons">
     <a href="login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
@@ -128,7 +146,10 @@
         <button id="chatbot-send">Enviar</button>
     </div>
 </div>
+
+<!-- ✨ OVERLAY -->
 <div id="overlay"></div>
+
 <!-- Carga del script de autenticación común (crea/actualiza js/auth.js con la versión que te pasé antes) -->
 <script src="js/auth.js"></script>
 <script src="javascript/js.js"></script>

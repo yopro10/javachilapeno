@@ -179,16 +179,26 @@
     <div class="cart-footer">
         <p><strong>Total: $<span id="cart-total">0</span></strong></p>
         <button class="checkout-btn">Pagar</button>
-        <span class="cart-counter">0</span>
     </div>
 </div>
 
 <!-- Botones flotantes -->
 <div class="floating-buttons">
-    <a href="../login.html" class="btn-login" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
-    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
-    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
+    <a href="../login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión">
+        <i class="fas fa-user"></i>
+    </a>
+    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="btn-chat" title="ChatBot">
+        <i class="fas fa-robot"></i>
+    </button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
+        <i class="fas fa-moon"></i>
+    </button>
 </div>
 
 <!-- ChatBot -->
@@ -206,48 +216,6 @@
 <div id="overlay"></div>
 
 <script src="../javascript/js.js"></script>
-<!-- Popup: iniciar sesión para usar carrito -->
-<div id="login-required-popup" class="popup-overlay" style="display:none;">
-  <div class="popup-card">
-    <h2>Inicia sesión para usar el carrito</h2>
-    <p>Debes iniciar sesión como cliente para añadir productos y ver el carrito.</p>
-    <div class="popup-actions">
-      <button id="close-login-popup" class="btn-cancel">Cerrar</button>
-      <button id="go-login-btn" class="btn-login">Iniciar sesión</button>
-    </div>
-  </div>
-</div>
-
-<style>
-.popup-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
-  z-index: 2000;
-}
-.popup-card {
-  background: #fff; border-radius: 12px; padding: 25px 35px; max-width: 500px; width: 90%;
-  text-align: left; box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-}
-.popup-card h2 {
-  font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: #222;
-}
-.popup-card p {
-  color: #444; margin-bottom: 25px;
-}
-.popup-actions {
-  display: flex; justify-content: flex-end; gap: 10px;
-}
-.btn-cancel {
-  background: #eee; color: #333; border: none; padding: 10px 16px; border-radius: 8px;
-  cursor: pointer; transition: background 0.2s;
-}
-.btn-cancel:hover { background: #ddd; }
-.btn-login {
-  background: #ff6600; color: #fff; border: none; padding: 10px 16px; border-radius: 8px;
-  cursor: pointer; font-weight: 600; transition: background 0.2s;
-}
-.btn-login:hover { background: #e05500; }
-</style>
 
 </body>
 </html>

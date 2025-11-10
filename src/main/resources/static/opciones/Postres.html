@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+
 <!-- 🔝 Barra de navegación -->
 <nav class="navbar">
     <a href="../Principal.html">Inicio</a>
@@ -31,66 +33,42 @@
             <img src="../imagenes/Postres/Dulcedemora.png" alt="Dulce de Mora">
             <h2>Dulce de Mora</h2>
             <p>$5.000 - Disfruta de nuestro delicioso dulce de mora, elaborado con fruta fresca y azúcar de la más alta calidad.</p>
-            <div class="purchase-panel">
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Dulce de Cereza" data-precio="5000">
             <img src="../imagenes/Postres/Dulcedecereza.png" alt="Dulce de Cereza">
             <h2>Dulce de Cereza</h2>
             <p>$5.000 - Un dulce exquisito con la frescura de la cereza, un sabor único para los amantes de la fruta.</p>
-            <div class="purchase-panel">
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Dulce de Fresa" data-precio="5000">
             <img src="../imagenes/Postres/DulceDeFresa.PNG" alt="Dulce de Fresa">
             <h2>Dulce de Fresa</h2>
             <p>$5.000 - El dulce más fresco y suave, hecho con fresas maduras, ideal para disfrutar después de una buena comida.</p>
-            <div class="purchase-panel">
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Quesadilla de Arequipe" data-precio="12400">
             <img src="../imagenes/Postres/QuesadillaDeArequipe.PNG" alt="Quesadilla de Arequipe">
             <h2>Quesadilla de Arequipe</h2>
             <p>$12.400 - Deliciosa quesadilla rellena de dulce de arequipe, con un toque crujiente y lleno de sabor.</p>
-            <div class="purchase-panel">
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Quesadilla de Mora" data-precio="12400">
             <img src="../imagenes/Postres/QuesadillaDeMora.PNG" alt="Quesadilla de Mora">
             <h2>Quesadilla de Mora</h2>
             <p>$12.400 - Una mezcla perfecta de queso y mora, en una quesadilla suave que te encantará.</p>
-            <div class="purchase-panel">
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
 
         <div class="item" data-nombre="Quesadilla de Fresa" data-precio="12400">
             <img src="../imagenes/Postres/QuesadillaDeFresa.PNG" alt="Quesadilla de Fresa">
             <h2>Quesadilla de Fresa</h2>
             <p>$12.400 - Quesadilla rellena con un sabor dulce y fresco de fresa, perfecta para el paladar más exigente.</p>
-            <div class="purchase-panel">
-                <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">
-                    Agregar al carrito
-                </button>
-            </div>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
         </div>
     </div>
 </main>
@@ -137,44 +115,17 @@
     <div class="cart-footer">
         <p><strong>Total: $<span id="cart-total">0</span></strong></p>
         <button class="checkout-btn">Pagar</button>
-        <span class="cart-counter">0</span>
-    </div>
-</div>
-
-<!-- Popup Confirmación de pago -->
-<div id="payment-confirmation-popup" class="popup">
-    <div class="popup-content">
-        <h3>¿Seguro que deseas pagar?</h3>
-        <div class="popup-buttons">
-            <button class="confirm-payment-btn">Sí, pagar</button>
-            <button class="cancel-payment-btn">Cancelar</button>
-        </div>
-    </div>
-</div>
-
-<!-- Popup Pago exitoso -->
-<div id="payment-success-popup" class="popup">
-    <div class="popup-content">
-        <h3>¡Pago Exitoso!</h3>
-        <p>Tu pedido ha sido recibido y será procesado.</p>
-        <button class="return-btn">Volver al menú</button>
-    </div>
-</div>
-
-<!-- Popup Carrito vacío -->
-<div id="empty-cart-popup" class="popup">
-    <div class="popup-content">
-        <h3>Carrito Vacío</h3>
-        <p>No tienes nada en el carrito. Agrega productos antes de pagar.</p>
-        <button class="return-btn">Cerrar</button>
     </div>
 </div>
 
 <!-- 🔘 Botones flotantes -->
 <div class="floating-buttons">
-    <a href="../login.html" class="btn-login" title="Iniciar Sesión">
+    <a href="../login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión">
         <i class="fas fa-user"></i>
     </a>
+    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
     <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>

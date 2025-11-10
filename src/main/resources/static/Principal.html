@@ -24,7 +24,10 @@
     <a href="contacto.html">Contáctanos</a>
     <!-- Enlaces solo para administradores -->
     <a href="PanelAdmin.html" class="admin-only">Panel Admin</a>
-
+    <!-- 🛒 BOTÓN DEL CARRITO -->
+    <a href="#" id="open-cart-btn" class="cart-icon-container">
+        🛒 <span class="cart-counter">0</span>
+    </a>
 </nav>
 
 <!-- Hero -->
@@ -57,22 +60,6 @@
         </div>
     </div>
 </section>
-
-<!-- ===============================
-     (ANTES) Panel de Administrador (solo visible para admins)
-     (AHORA: seguirá existiendo en PanelAdmin.html; en la página inicio
-      lo ocultamos para administradores y mostramos un anuncio)
-     =============================== -->
-
-<!-- Mantengo la sección por compatibilidad (si quieres eliminarla, puedes),
-     pero la ocultaremos vía JS cuando el usuario sea admin. -->
-<!-- === Nueva sección: anuncio para administradores (se muestra en inicio cuando admin) === -->
-<section id="adminAnnouncement" class="admin-announcement" style="display:none;">
-    <h3>Panel de Administrador Disponible</h3>
-    <p>Estás conectado como administrador. Para gestionar el sistema, utiliza el Panel de Administrador dedicado.</p>
-    <a href="PanelAdmin.html">Abrir Panel Admin</a>
-</section>
-
 
 <!-- === Nueva sección: anuncio para administradores (se muestra en inicio cuando admin) === -->
 <section id="adminAnnouncement" class="admin-announcement" style="display:none;">
@@ -157,6 +144,21 @@
     <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
 
+<!-- ✨ CARRITO LATERAL -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-footer">
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
+    </div>
+</div>
+
 <!-- Botones flotantes -->
 <div class="floating-buttons">
     <a href="login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
@@ -165,6 +167,7 @@
     <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
     <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
 </div>
+
 <!-- Panel del ChatBot -->
 <div id="chatbot-panel">
     <div class="chatbot-header">
@@ -179,6 +182,8 @@
         <button id="chatbot-send">Enviar</button>
     </div>
 </div>
+
+<!-- ✨ OVERLAY -->
 <div id="overlay"></div>
 
 <script src="javascript/js.js"></script>

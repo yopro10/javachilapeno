@@ -355,18 +355,18 @@ body {
     margin: 20px auto;
     padding: 22px;
     border-radius: 12px;
-    background: linear-gradient(90deg,#ffd54f10,#fff2cc);
-    border: 1px solid rgba(255,215,0,0.15);
+    background: linear-gradient(90deg,#716f6810,#1c1b1b);
+    border: 1px solid rgba(2, 2, 2, 0.15);
     display: none; /* por defecto oculto, se muestra vía JS cuando corresponde */
     text-align: center;
 }
 .admin-announcement h3 {
-    color: #ff8c00;
+    color: #eae4de;
     margin: 0 0 8px 0;
     font-size: 1.15rem;
 }
 .admin-announcement p {
-    color: #5a3d00;
+    color: #f7f7f7;
     margin: 0 0 12px 0;
 }
 .admin-announcement a {
