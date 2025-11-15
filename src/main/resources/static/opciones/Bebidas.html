@@ -10,16 +10,16 @@
 </head>
 
 <body>
-<!-- 🔝 Barra de navegación -->
+<!-- Barra de navegación -->
 <nav class="navbar">
     <a href="../Principal.html">Inicio</a>
     <a href="../Eventos.html">Eventos</a>
     <a href="../contacto.html">Contáctanos</a>
+    <a href="../PanelAdmin.html" class="admin-only">Panel Admin</a>
     <a href="#" id="open-cart-btn" class="cart-icon-container">
         🛒 <span class="cart-counter">0</span>
     </a>
 </nav>
-
 
 <!-- Sección del Menú -->
 <main class="menu-container">
@@ -201,50 +201,30 @@
     <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
 </footer>
 
-<!-- 🛒 Panel del Carrito Moderno -->
+<!-- ✨ CARRITO LATERAL -->
 <div id="cart-panel">
     <div class="cart-header">
         <h2>Tu Carrito</h2>
         <button id="close-cart-btn">&times;</button>
     </div>
     <div id="cart-items">
-        <div class="empty-cart-message">
-            Tu carrito está vacío
-        </div>
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
     </div>
     <div class="cart-footer">
-        <p>
-            <strong>Total:</strong>
-            <span>$<span id="cart-total">0</span></span>
-        </p>
-        <button class="checkout-btn">🛍️ Proceder al Pago</button>
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
     </div>
 </div>
 
-<!-- Botones flotantes -->
+<!-- 🔘 Botones flotantes -->
 <div class="floating-buttons">
-    <!-- Botón de Iniciar Sesión (se oculta cuando hay sesión activa) -->
-    <a href="../login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión">
-        <i class="fas fa-user"></i>
-    </a>
-    
-    <!-- Botón de Cerrar Sesión (se muestra cuando hay sesión activa) -->
-    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;">
-        <i class="fas fa-sign-out-alt"></i>
-    </button>
-    
-    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <button class="btn-chat" title="ChatBot">
-        <i class="fas fa-robot"></i>
-    </button>
-    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
-        <i class="fas fa-moon"></i>
-    </button>
+    <a href="../login.html" class="btn-login" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
 </div>
 
-<!-- ChatBot -->
+<!-- ✨ CHATBOT  -->
 <div id="chatbot-panel">
     <div class="chatbot-header">
         <h3>🤖 ChatBot</h3>
@@ -257,7 +237,7 @@
     </div>
 </div>
 
-<!-- Overlay -->
+<!-- ✨ OVERLAY  -->
 <div id="overlay"></div>
 
 <script src="../javascript/js.js"></script>

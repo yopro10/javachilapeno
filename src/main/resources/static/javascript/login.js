@@ -82,7 +82,7 @@ function createDemoAccounts() {
 function showAlert(message, type = 'error') {
     const alertContainer = document.getElementById('alertContainer');
     
-    // 🔧 ARREGLO: Limpiar alertas anteriores antes de mostrar una nueva
+    // Limpiar alertas anteriores antes de mostrar una nueva
     alertContainer.innerHTML = '';
     
     alertContainer.innerHTML = `
@@ -103,6 +103,45 @@ function showAlert(message, type = 'error') {
     }
 }
 
+// 🆕 NUEVA FUNCIÓN: Mostrar alerta dentro del modal
+function showModalAlert(message, type = 'error') {
+    // Buscar o crear contenedor de alertas en el modal
+    let modalAlertContainer = document.getElementById('modalAlertContainer');
+    
+    if (!modalAlertContainer) {
+        modalAlertContainer = document.createElement('div');
+        modalAlertContainer.id = 'modalAlertContainer';
+        
+        // Insertar antes del primer input-group del modal
+        const modal = document.querySelector('.modal');
+        const firstInputGroup = modal.querySelector('.input-group');
+        modal.insertBefore(modalAlertContainer, firstInputGroup);
+    }
+    
+    // Limpiar alertas anteriores
+    modalAlertContainer.innerHTML = '';
+    
+    modalAlertContainer.innerHTML = `
+        <div class="alert alert-${type}" style="margin-bottom: 15px;">
+          <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+          ${message}
+        </div>
+    `;
+
+    // Auto-limpiar después de 5 segundos
+    setTimeout(() => {
+        modalAlertContainer.innerHTML = '';
+    }, 5000);
+}
+
+// 🆕 FUNCIÓN: Limpiar alertas del modal
+function clearModalAlerts() {
+    const modalAlertContainer = document.getElementById('modalAlertContainer');
+    if (modalAlertContainer) {
+        modalAlertContainer.innerHTML = '';
+    }
+}
+
 function quickLogin(email, password, role) {
     if (role === 'admin') {
         btnAdmin.click();
@@ -118,9 +157,7 @@ function quickLogin(email, password, role) {
     }, 300);
 }
 
-// ========================================
-// EVENTO DE LOGIN (MODIFICADO)
-// ========================================
+// EVENTO DE LOGIN
 loginForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -167,13 +204,16 @@ loginForm.addEventListener("submit", function(e) {
 
 // Abrir modal de crear cuenta
 crearCuentaLink.addEventListener("click", (e) => {
-    e.preventDefault(); // 🔧 ARREGLO: Prevenir comportamiento por defecto
+    e.preventDefault();
     
-    // 🔧 ARREGLO: Limpiar alertas antes de abrir el modal
+    // Limpiar alertas de la página principal
     const alertContainer = document.getElementById('alertContainer');
     if (alertContainer) {
         alertContainer.innerHTML = '';
     }
+    
+    // Limpiar alertas del modal
+    clearModalAlerts();
     
     const role = btnAdmin.classList.contains("active") ? "admin" : "cliente";
     selectedRoleInput.value = role.charAt(0).toUpperCase() + role.slice(1);
@@ -181,7 +221,6 @@ crearCuentaLink.addEventListener("click", (e) => {
     newPassword.value = "";
     modalOverlay.style.display = "flex";
     
-    // 🔧 ARREGLO: Dar tiempo para que se renderice el modal antes de hacer focus
     setTimeout(() => {
         newEmail.focus();
     }, 100);
@@ -192,33 +231,35 @@ cancelCreate.addEventListener("click", (e) => {
     e.preventDefault();
     modalOverlay.style.display = "none";
     
-    // 🔧 ARREGLO: Limpiar campos del modal
+    // Limpiar campos del modal
     newEmail.value = "";
     newPassword.value = "";
+    
+    // Limpiar alertas del modal
+    clearModalAlerts();
 });
 
-// ========================================
-// CONFIRMAR CREACIÓN DE CUENTA (MODIFICADO)
-// ========================================
+// ✅ CONFIRMAR CREACIÓN DE CUENTA (CORREGIDO)
 confirmCreate.addEventListener("click", (e) => {
     e.preventDefault();
     const emailVal = newEmail.value.trim();
     const passVal = newPassword.value;
     const roleVal = btnAdmin.classList.contains("active") ? "admin" : "cliente";
 
+    // 🔧 Validaciones ahora muestran alertas DENTRO del modal
     if (!emailVal || !passVal) {
-        showAlert("Por favor completa correo y contraseña.", 'warning');
+        showModalAlert("Por favor completa correo y contraseña.", 'warning');
         return;
     }
 
     if (passVal.length < 6) {
-        showAlert("La contraseña debe tener al menos 6 caracteres.", 'warning');
+        showModalAlert("⚠️ La contraseña debe tener al menos 6 caracteres.", 'warning');
         return;
     }
 
     let users = getUsers();
     if (users.some(u => u.email === emailVal)) {
-        showAlert("⚠️ Este correo ya está registrado.", 'warning');
+        showModalAlert("⚠️ Este correo ya está registrado.", 'warning');
         return;
     }
 
@@ -228,13 +269,17 @@ confirmCreate.addEventListener("click", (e) => {
     // Guardar sesión completa
     setUserSession(emailVal, roleVal);
 
-    // 🔧 ARREGLO: Cerrar modal ANTES de mostrar la alerta de éxito
+    // Cerrar modal ANTES de mostrar la alerta de éxito
     modalOverlay.style.display = "none";
     
     // Limpiar campos
     newEmail.value = "";
     newPassword.value = "";
+    
+    // Limpiar alertas del modal
+    clearModalAlerts();
 
+    // Mostrar alerta de éxito en la página principal
     showAlert("✅ ¡Cuenta creada exitosamente! Redirigiendo...", 'success');
 
     // Verificar si hay una página guardada para volver
@@ -255,9 +300,12 @@ modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) {
         modalOverlay.style.display = "none";
         
-        // 🔧 ARREGLO: Limpiar campos al cerrar
+        // Limpiar campos al cerrar
         newEmail.value = "";
         newPassword.value = "";
+        
+        // Limpiar alertas del modal
+        clearModalAlerts();
     }
 });
 

@@ -658,7 +658,7 @@ function toggleUsersList() {
     const adminContent = document.getElementById('adminContent');
     const users = getUsers();
     adminContent.innerHTML = `
-        <h3><i class="fas fa-users"></i> Lista de Usuarios</h3>
+        <h2><i class="fas fa-users"></i> Lista de Usuarios</h2>
         <div class="user-list">
             ${users.map(user => `
                 <div class="user-item">
@@ -677,12 +677,24 @@ function showStats() {
     const clienteCount = users.filter(u => u.role === 'cliente').length;
     const adminContent = document.getElementById('adminContent');
     adminContent.innerHTML = `
-        <h3><i class="fas fa-chart-bar"></i> Estadísticas del Sistema</h3>
+        <h2><i class="fas fa-chart-line"></i> Estadísticas del Sistema</h2>
         <div class="stats-grid">
-            <div class="stat-card"><div class="stat-number">${users.length}</div><div>Total Usuarios</div></div>
-            <div class="stat-card"><div class="stat-number">${clienteCount}</div><div>Clientes</div></div>
-            <div class="stat-card"><div class="stat-number">${adminCount}</div><div>Administradores</div></div>
-            <div class="stat-card"><div class="stat-number">24/7</div><div>Disponibilidad</div></div>
+            <div class="stat-card">
+                <div class="stat-number">${users.length}</div>
+                <div class="stat-label">Total Usuarios</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${clienteCount}</div>
+                <div class="stat-label">Clientes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${adminCount}</div>
+                <div class="stat-label">Administradores</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Disponibilidad</div>
+            </div>
         </div>
     `;
 }
@@ -690,11 +702,20 @@ function showStats() {
 function toggleAdminTools() {
     const adminContent = document.getElementById('adminContent');
     adminContent.innerHTML = `
-        <h3><i class="fas fa-cogs"></i> Herramientas de Administración</h3>
-        <div class="admin-buttons">
-            <button class="admin-btn" onclick="clearAllUsers()"><i class="fas fa-trash"></i><br>Limpiar Usuarios</button>
-            <button class="admin-btn" onclick="exportData()"><i class="fas fa-download"></i><br>Exportar Datos</button>
-            <button class="admin-btn" onclick="showSystemInfo()"><i class="fas fa-info-circle"></i><br>Info del Sistema</button>
+        <h2><i class="fas fa-tools"></i> Herramientas de Administración</h2>
+        <div class="admin-tools-grid">
+            <button class="tool-btn" onclick="clearAllUsers()">
+                <i class="fas fa-trash-alt"></i>
+                Limpiar Usuarios
+            </button>
+            <button class="tool-btn" onclick="exportData()">
+                <i class="fas fa-download"></i>
+                Exportar Datos
+            </button>
+            <button class="tool-btn" onclick="showSystemInfo()">
+                <i class="fas fa-info-circle"></i>
+                Info del Sistema
+            </button>
         </div>
     `;
 }
@@ -702,14 +723,14 @@ function toggleAdminTools() {
 function showReports() {
     const adminContent = document.getElementById('adminContent');
     adminContent.innerHTML = `
-        <h3><i class="fas fa-file-alt"></i> Reportes del Sistema</h3>
-        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-            <p><strong>Reporte de Actividad:</strong></p>
+        <h2><i class="fas fa-file-alt"></i> Reportes del Sistema</h2>
+        <div style="background: #f9f9f9; padding: 25px; border-radius: 10px; margin-top: 20px;">
+            <p style="margin-bottom: 15px;"><strong>Reporte de Actividad:</strong></p>
             <ul style="list-style: none; padding: 0;">
-                <li><i class="fas fa-check text-success"></i> Sistema operativo</li>
-                <li><i class="fas fa-users"></i> ${getUsers().length} usuarios registrados</li>
-                <li><i class="fas fa-calendar"></i> Último acceso: ${new Date().toLocaleString()}</li>
-                <li><i class="fas fa-server"></i> Almacenamiento: LocalStorage</li>
+                <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: #4caf50;"></i> Sistema operativo</li>
+                <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-users"></i> ${getUsers().length} usuarios registrados</li>
+                <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-calendar"></i> Último acceso: ${new Date().toLocaleString()}</li>
+                <li style="padding: 8px 0;"><i class="fas fa-server"></i> Almacenamiento: LocalStorage</li>
             </ul>
         </div>
     `;
@@ -741,14 +762,14 @@ function exportData() {
 function showSystemInfo() {
     const adminContent = document.getElementById('adminContent');
     adminContent.innerHTML = `
-        <h3><i class="fas fa-info-circle"></i> Información del Sistema</h3>
-        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-            <p><strong>Sistema Chilapeños v1.0</strong></p>
-            <p><strong>Navegador:</strong> ${navigator.userAgent.split(' ')[0]}</p>
-            <p><strong>Fecha del sistema:</strong> ${new Date().toLocaleString()}</p>
-            <p><strong>Storage utilizado:</strong> LocalStorage</p>
-            <p><strong>Usuarios registrados:</strong> ${getUsers().length}</p>
-            <p><strong>Estado:</strong> <span style="color: #4CAF50;">✓ Online</span></p>
+        <h2><i class="fas fa-info-circle"></i> Información del Sistema</h2>
+        <div style="background: #f9f9f9; padding: 25px; border-radius: 10px; margin-top: 20px;">
+            <p style="margin-bottom: 12px;"><strong>Sistema Chilapeños v1.0</strong></p>
+            <p style="margin-bottom: 8px;"><strong>Navegador:</strong> ${navigator.userAgent.split(' ')[0]}</p>
+            <p style="margin-bottom: 8px;"><strong>Fecha del sistema:</strong> ${new Date().toLocaleString()}</p>
+            <p style="margin-bottom: 8px;"><strong>Storage utilizado:</strong> LocalStorage</p>
+            <p style="margin-bottom: 8px;"><strong>Usuarios registrados:</strong> ${getUsers().length}</p>
+            <p style="margin-bottom: 0;"><strong>Estado:</strong> <span style="color: #4CAF50;">✓ Online</span></p>
         </div>
     `;
 }
