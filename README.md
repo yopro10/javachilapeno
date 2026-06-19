@@ -11,6 +11,12 @@ Backend Spring Boot para gestión de carrito de compras con PostgreSQL.
 3. Crea un nuevo proyecto PostgreSQL
 4. Copia la cadena de conexión que te proporcionan (formato: `postgresql://user:password@ep-xxx.aws.neon.tech/neondb?sslmode=require`)
 
+**Credenciales actuales del proyecto:**
+- Host: `ep-still-tooth-aipprixy-pooler.c-4.us-east-1.aws.neon.tech`
+- Database: `neondb`
+- Username: `neondb_owner`
+- Password: `npg_Jh0lI5EpVcbR`
+
 ### 2. Configurar variables de entorno en Render.com
 
 1. Ve a [https://render.com](https://render.com)
@@ -24,13 +30,11 @@ Backend Spring Boot para gestión de carrito de compras con PostgreSQL.
 7. En "Environment", agrega las siguientes variables de entorno:
 
 ```
-DATABASE_URL=jdbc:postgresql://user:password@ep-xxx.aws.neon.tech/neondb?sslmode=require
-DATABASE_USERNAME=tu_usuario_neon
-DATABASE_PASSWORD=tu_contraseña_neon
+DATABASE_URL=jdbc:postgresql://ep-still-tooth-aipprixy-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require
+DATABASE_USERNAME=neondb_owner
+DATABASE_PASSWORD=npg_Jh0lI5EpVcbR
 PORT=8080
 ```
-
-**Nota**: Reemplaza los valores con los de tu conexión Neon.tech real.
 
 ### 3. Probar localmente con Neon.tech
 
@@ -38,17 +42,17 @@ Para probar la aplicación localmente usando Neon.tech:
 
 **Windows (PowerShell):**
 ```powershell
-$env:DATABASE_URL="jdbc:postgresql://user:password@ep-xxx.aws.neon.tech/neondb?sslmode=require"
-$env:DATABASE_USERNAME="tu_usuario_neon"
-$env:DATABASE_PASSWORD="tu_contraseña_neon"
+$env:DATABASE_URL="jdbc:postgresql://ep-still-tooth-aipprixy-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require"
+$env:DATABASE_USERNAME="neondb_owner"
+$env:DATABASE_PASSWORD="npg_Jh0lI5EpVcbR"
 mvn spring-boot:run
 ```
 
 **Linux/Mac:**
 ```bash
-export DATABASE_URL="jdbc:postgresql://user:password@ep-xxx.aws.neon.tech/neondb?sslmode=require"
-export DATABASE_USERNAME="tu_usuario_neon"
-export DATABASE_PASSWORD="tu_contraseña_neon"
+export DATABASE_URL="jdbc:postgresql://ep-still-tooth-aipprixy-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require"
+export DATABASE_USERNAME="neondb_owner"
+export DATABASE_PASSWORD="npg_Jh0lI5EpVcbR"
 mvn spring-boot:run
 ```
 
