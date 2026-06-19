@@ -1,5 +1,5 @@
-# Usar imagen base de OpenJDK 17
-FROM openjdk:17-slim
+# Usar imagen base de OpenJDK 17 con Maven incluido
+FROM maven:3.9-eclipse-temurin-17 AS build
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -14,8 +14,16 @@ COPY src ./src
 # Compilar y empaquetar la aplicación
 RUN mvn clean package -DskipTests
 
-# Exponer el puerto 8080 (Render usa variables de entorno, pero esto es un fallback)
+# Imagen final más pequeña
+FROM eclipse-temurin:17-jre-alpine
+
+WORKDIR /app
+
+# Copiar el JAR desde la etapa de build
+COPY --from=build /app/target/javachilapeno-1.0-SNAPSHOT.jar app.jar
+
+# Exponer el puerto 8080
 EXPOSE 8080
 
 # Ejecutar la aplicación
-CMD ["java", "-jar", "target/javachilapeno-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
