@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postres - Chilapeños</title>
+    <link rel="stylesheet" href="../css/prueba.css">
+    <!-- Iconos (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- 🔝 Barra de navegación -->
+<nav class="navbar">
+    <a href="../Principal.html">Inicio</a>
+    <a href="../Eventos.html">Eventos</a>
+    <a href="../contacto.html">Contáctanos</a>
+    <!-- ✅ PANEL ADMIN CON RUTA CORRECTA -->
+    <a href="../PanelAdmin.html" class="admin-only">Panel Admin</a>
+    <a href="#" id="open-cart-btn" class="cart-icon-container">
+        🛒 <span class="cart-counter">0</span>
+    </a>
+</nav>
+
+<!-- Sección del Menú -->
+<main class="menu-container">
+    <h1>Postres</h1>
+    <h2>Endulza tu experiencia</h2>
+
+    <div class="menu-items">
+
+        <div class="item" data-nombre="Dulce de Mora" data-precio="5000">
+            <img src="../imagenes/Postres/Dulcedemora.png" alt="Dulce de Mora">
+            <h2>Dulce de Mora</h2>
+            <p>$5.000 - Disfruta de nuestro delicioso dulce de mora, elaborado con fruta fresca y azúcar de la más alta calidad.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Dulce de Cereza" data-precio="5000">
+            <img src="../imagenes/Postres/Dulcedecereza.png" alt="Dulce de Cereza">
+            <h2>Dulce de Cereza</h2>
+            <p>$5.000 - Un dulce exquisito con la frescura de la cereza, un sabor único para los amantes de la fruta.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Dulce de Fresa" data-precio="5000">
+            <img src="../imagenes/Postres/DulceDeFresa.PNG" alt="Dulce de Fresa">
+            <h2>Dulce de Fresa</h2>
+            <p>$5.000 - El dulce más fresco y suave, hecho con fresas maduras, ideal para disfrutar después de una buena comida.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Quesadilla de Arequipe" data-precio="12400">
+            <img src="../imagenes/Postres/QuesadillaDeArequipe.PNG" alt="Quesadilla de Arequipe">
+            <h2>Quesadilla de Arequipe</h2>
+            <p>$12.400 - Deliciosa quesadilla rellena de dulce de arequipe, con un toque crujiente y lleno de sabor.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Quesadilla de Mora" data-precio="12400">
+            <img src="../imagenes/Postres/QuesadillaDeMora.PNG" alt="Quesadilla de Mora">
+            <h2>Quesadilla de Mora</h2>
+            <p>$12.400 - Una mezcla perfecta de queso y mora, en una quesadilla suave que te encantará.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Quesadilla de Fresa" data-precio="12400">
+            <img src="../imagenes/Postres/QuesadillaDeFresa.PNG" alt="Quesadilla de Fresa">
+            <h2>Quesadilla de Fresa</h2>
+            <p>$12.400 - Quesadilla rellena con un sabor dulce y fresco de fresa, perfecta para el paladar más exigente.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img src="../imagenes/varios/logo.png" alt="logo chilapeños">
+            <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
+                Pide tu domicilio en nuestro WhatsApp o llamanos al <br><strong>314 4230347</strong></p>
+        </div>
+
+        <div class="footer-info">
+            <h3>Horario de atención</h3>
+            <p>Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
+            <p>Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
+            <p>Domingos: 1:00 p.m – 9:00 p.m</p>
+
+            <h3>Métodos de pago</h3>
+            <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
+            <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contáctanos</h3>
+            <p>📍 Normandía sobre la CAlLE 63 #78-25, Bogotá</p>
+            <p>📞 Domicilios: 314 4230347 </p>
+        </div>
+    </div>
+
+    <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
+</footer>
+
+<!-- Carrito lateral -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-footer">
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
+    </div>
+</div>
+
+<!-- 🔘 Botones flotantes -->
+<div class="floating-buttons">
+    <a href="../login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión">
+        <i class="fas fa-user"></i>
+    </a>
+    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="btn-chat" title="ChatBot">
+        <i class="fas fa-robot"></i>
+    </button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
+
+<!-- Panel del ChatBot -->
+<div id="chatbot-panel">
+    <div class="chatbot-header">
+        <h3>🤖 ChatBot</h3>
+        <button id="close-chatbot">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
+        <button id="chatbot-send">Enviar</button>
+    </div>
+</div>
+<div id="overlay"></div>
+
+<!-- Scripts -->
+<script src="../javascript/js.js"></script>
+</body>
+</html>

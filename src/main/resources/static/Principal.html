@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chilapeños</title>
+    <link rel="stylesheet" href="css/principal.css">
+    <link rel="stylesheet" href="css/prueba.css">
+
+    <!-- Iconos (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Indicador de usuario (esquina superior derecha) -->
+<div class="user-indicator" id="userIndicator" style="display: none;">
+    <span id="userEmail"></span> | <span id="userRoleDisplay" class="role-badge"></span>
+</div>
+
+<!-- Barra superior -->
+<nav class="navbar">
+    <a href="Principal.html" class="active">Inicio</a>
+    <a href="Eventos.html">Eventos</a>
+    <a href="contacto.html">Contáctanos</a>
+    <!-- Enlaces solo para administradores -->
+    <a href="PanelAdmin.html" class="admin-only">Panel Admin</a>
+    <!-- 🛒 BOTÓN DEL CARRITO -->
+    <a href="#" id="open-cart-btn" class="cart-icon-container">
+        🛒 <span class="cart-counter">0</span>
+    </a>
+</nav>
+
+<!-- Hero -->
+<section class="hero-fastfood">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h3 class="highlight">Sazón Mexicano</h3>
+            <h1>CHILAPEÑO</h1>
+            <h4>Tradición con mucho sabor</h4>
+            <p id="heroBienvenida">
+                Comida tradicional Mexicana, disfruta del mejor sabor mexicano sin picante... pero conservando nuestro toque secreto
+            </p>
+            <a class="btn-register" id="scrollToMenu">Explora el menú</a>
+        </div>
+
+        <div class="hero-image">
+            <div class="circle">
+                <img src="imagenes/varios/Goku.jpg" alt="Plato chilapeño">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Inicio (sin botones MENÚ y PEDIR DOMICILIO) -->
+<section class="inciio">
+    <div class="inicio-content" style="text-align:center;padding:40px;">
+        <h1 id="tituloInicio">¿Qué te provoca hoy?</h1>
+        <div class="buttons" style="margin-top: 20px;">
+            <!-- botones removidos intencionalmente -->
+        </div>
+    </div>
+</section>
+
+<!-- === Nueva sección: anuncio para administradores (se muestra en inicio cuando admin) === -->
+<section id="adminAnnouncement" class="admin-announcement" style="display:none;">
+    <h3>Panel de Administrador Disponible</h3>
+    <p>Estás conectado como administrador. Para gestionar el sistema, utiliza el Panel de Administrador dedicado.</p>
+    <a href="PanelAdmin.html">Abrir Panel Admin</a>
+</section>
+
+<!-- Categorías (destino del scroll) -->
+<section id="categorias" class="categorias">
+    <p class="banner">
+        Todos nuestros domicilios tienen recargo dependiendo del lugar del domicilio
+    </p>
+
+    <div class="grid">
+        <!-- Card 1 -->
+        <div class="card">
+            <a href="opciones/Entradas.html">
+                <img src="imagenes/varios/Pro.Entradas.png" alt="Entradas">
+                <h3>Entradas</h3>
+                <p>Te mostramos nuestras entradas más populares: tacos, quesadillas, nachos y más.</p>
+            </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <a href="opciones/PlatosFuertes.html">
+                <img src="imagenes/varios/Pro.Plato Fuerte.png" alt="Platos Fuertes">
+                <h3>Platos Fuertes</h3>
+                <p>Platos contundentes con sabores tradicionales y porciones generosas.</p>
+            </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <a href="opciones/Bebidas.html">
+                <img src="imagenes/varios/Pro.Bebidas.png" alt="Bebidas">
+                <h3>Bebidas</h3>
+                <p>Refrescos, aguas y bebidas tradicionales para acompañar tu comida.</p>
+            </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+            <a href="opciones/Postres.html">
+                <img src="imagenes/varios/Pro.Postres.png" alt="Postres">
+                <h3>Postres</h3>
+                <p>Dulces finales para cerrar con broche de oro.</p>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img src="imagenes/varios/logo.png" alt="logo chilapeños">
+            <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
+                Pide tu domicilio en nuestro WhatsApp o llamanos al <br><strong>314 4230347</strong></p>
+        </div>
+
+        <div class="footer-info">
+            <h3>Horario de atención</h3>
+            <p>Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
+            <p>Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
+            <p>Domingos: 1:00 p.m – 9:00 p.m</p>
+
+            <h3>Métodos de pago</h3>
+            <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
+            <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contáctanos</h3>
+            <p>📍 Normandía sobre la CAlLE 63 #78-25, Bogotá</p>
+            <p>📞 Domicilios: 314 4230347 </p>
+        </div>
+    </div>
+
+    <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
+</footer>
+
+<!-- ✨ CARRITO LATERAL -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-footer">
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
+    </div>
+</div>
+
+<!-- Botones flotantes -->
+<div class="floating-buttons">
+    <a href="login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
+    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;"><i class="fas fa-sign-out-alt"></i></button>
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
+</div>
+
+<!-- Panel del ChatBot -->
+<div id="chatbot-panel">
+    <div class="chatbot-header">
+        <h3>🤖 ChatBot</h3>
+        <button id="close-chatbot">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+        <!-- Los mensajes se insertan por JS -->
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
+        <button id="chatbot-send">Enviar</button>
+    </div>
+</div>
+
+<!-- ✨ OVERLAY -->
+<div id="overlay"></div>
+
+<script src="javascript/js.js"></script>
+</body>
+</html>

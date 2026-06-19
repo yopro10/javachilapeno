@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entradas - Chilapeños</title>
+    <link rel="stylesheet" href="../css/prueba.css">
+    <!-- Iconos (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- 🔝 Barra de navegación -->
+<nav class="navbar">
+    <a href="../Principal.html">Inicio</a>
+    <a href="../Eventos.html">Eventos</a>
+    <a href="../contacto.html">Contáctanos</a>
+    <!-- ✅ PANEL ADMIN CON RUTA CORRECTA -->
+    <a href="../PanelAdmin.html" class="admin-only">Panel Admin</a>
+    <a href="#" id="open-cart-btn" class="cart-icon-container">
+        🛒 <span class="cart-counter">0</span>
+    </a>
+</nav>
+
+<!-- Sección del Menú -->
+<main class="menu-container">
+    <h1>Entradas</h1>
+    <h2>Nuestro delicioso menú de entradas</h2>
+
+    <div class="menu-items">
+
+        <div class="item" data-nombre="Enfrijoladas" data-precio="14400">
+            <img src="../imagenes/Entradas/Enfrijoladas.PNG" alt="Enfrijoladas">
+            <h2>Enfrijoladas</h2>
+            <p>$14.400 - 3 quesadillas de maíz sumergidas en frijol refrito y salsa ranchera cubierta con queso.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Taco" data-precio="8400">
+            <img src="../imagenes/Entradas/Taco.PNG" alt="Taco">
+            <h2>Taco</h2>
+            <p>$8.400 - (Carne, pollo o mixto) tortilla de maíz rellena con frijol refrito, guacamole, pico de gallo, sour cream y lechuga.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Taco x 3" data-precio="18000">
+            <img src="../imagenes/Entradas/Tacox3.PNG" alt="Taco x 3">
+            <h2>Taco x 3</h2>
+            <p>$18.000 - (Carne, pollo o mixto) tortillas de maíz rellenas con frijol refrito, guacamole, pico de gallo, sour cream y lechuga.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Quesadilla pequeña" data-precio="11000">
+            <img src="../imagenes/Entradas/Quesadillapequeña.PNG" alt="Quesadilla pequeña">
+            <h2>Quesadilla pequeña</h2>
+            <p>$11.000 - Tortilla rellena de queso, acompañada de una o dos salsas.<br>*¡Pregunta por nuestros adicionales!</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Quesadilla grande" data-precio="13000">
+            <img src="../imagenes/Entradas/Quesadillagrande.PNG" alt="Quesadilla grande">
+            <h2>Quesadilla grande</h2>
+            <p>$13.000 - Tortilla rellena de queso, acompañada de una o dos salsas.<br>*¡Pregunta por nuestros adicionales!</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Ensalada Chilapeña" data-precio="14000">
+            <img src="../imagenes/Entradas/EnsaladaChilapeña.PNG" alt="Ensalada Chilapeña">
+            <h2>Ensalada Chilapeña</h2>
+            <p>$14.000 - Lechuga, champiñón, pico de gallo, sour cream, guacamole, brócoli, espinacas, zanahoria, queso y maíz tierno.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Nachos Bandeja Grande" data-precio="17000">
+            <img src="../imagenes/Entradas/NachosBandejaGrande.PNG" alt="Nachos Bandeja Grande">
+            <h2>Nachos Bandeja Grande</h2>
+            <p>$17.000 - Nachos mexicanos cubiertos de frijol refrito, queso, guacamole, sour cream y pico de gallo.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Nachos Bandeja Mediana" data-precio="12000">
+            <img src="../imagenes/Entradas/NachosBandejamedia.PNG" alt="Nachos Mediana">
+            <h2>Nachos - mediana</h2>
+            <p>$12.000 - Nachos mexicanos cubiertos de frijol refrito, queso, guacamole, sour cream y pico de gallo.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Nachos Personal" data-precio="8700">
+            <img src="../imagenes/Entradas/NachosBandejapersonal.PNG" alt="Nachos Personal">
+            <h2>Nachos - personal</h2>
+            <p>$8.700 - Nachos mexicanos cubiertos de frijol refrito, queso, guacamole, sour cream y pico de gallo.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Sopa azteca" data-precio="11000">
+            <img src="../imagenes/Entradas/Sopaazteca.PNG" alt="Sopa azteca">
+            <h2>Sopa azteca</h2>
+            <p>$11.000 - Caldo de pollo con nachos, guacamole, salsa ranchera, sour cream, queso y pollo desmechado.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Crema de frijol" data-precio="11000">
+            <img src="../imagenes/Entradas/Cremadefrijol.PNG" alt="Crema de frijol">
+            <h2>Crema de frijol</h2>
+            <p>$11.000 - Frijol refrito acompañado con nachos, guacamole, sour cream y queso.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+        <div class="item" data-nombre="Adicionales" data-precio="7500">
+            <img src="../imagenes/Entradas/Adiciones.PNG" alt="Adicionales">
+            <h2>Adicionales</h2>
+            <p>$7.500 - Res, pollo, cerdo, champiñón, verduras o chorizo c/u.</p>
+            <button onclick="agregarAlCarrito(this)" class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img src="../imagenes/varios/logo.png" alt="logo chilapeños">
+            <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>
+                Pide tu domicilio en nuestro WhatsApp o llámanos al <br><strong>314 4230347</strong></p>
+        </div>
+
+        <div class="footer-info">
+            <h3>Horario de atención</h3>
+            <p>Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
+            <p>Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
+            <p>Domingos: 1:00 p.m – 9:00 p.m</p>
+
+            <h3>Métodos de pago</h3>
+            <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
+            <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contáctanos</h3>
+            <p>📍 Normandía sobre la CALLE 63 #78-25, Bogotá</p>
+            <p>📞 Domicilios: 314 4230347 </p>
+        </div>
+    </div>
+
+    <p class="footer-copy">software3 | Copyright © 2025
+        <span>chilapeñitos.com</span> - Todos los derechos reservados
+    </p>
+</footer>
+
+<!-- 🛒 Panel del Carrito Moderno -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <div class="empty-cart-message">
+            Tu carrito está vacío
+        </div>
+    </div>
+    <div class="cart-footer">
+        <p>
+            <strong>Total:</strong>
+            <span>$<span id="cart-total">0</span></span>
+        </p>
+        <button class="checkout-btn">🛍️ Proceder al Pago</button>
+    </div>
+</div>
+
+<!-- Botones flotantes -->
+<div class="floating-buttons">
+    <!-- Botón de Iniciar Sesión (se oculta cuando hay sesión activa) -->
+    <a href="../login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión">
+        <i class="fas fa-user"></i>
+    </a>
+    
+    <!-- Botón de Cerrar Sesión (se muestra cuando hay sesión activa) -->
+    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+    
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="btn-chat" title="ChatBot">
+        <i class="fas fa-robot"></i>
+    </button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
+
+<!-- ChatBot -->
+<div id="chatbot-panel">
+    <div class="chatbot-header">
+        <h3>🤖 ChatBot</h3>
+        <button id="close-chatbot">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
+        <button id="chatbot-send">Enviar</button>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<script src="../javascript/js.js"></script>
+</body>
+</html>

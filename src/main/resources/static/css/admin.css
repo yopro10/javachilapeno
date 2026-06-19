@@ -1,0 +1,71 @@
+/* Barra de navegación (coincidente con tu estilo original) */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background-color: #ff6600;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+/* estilo del enlace activo (amarillo) */
+.navbar a.active {
+    background-color: #FFD700;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos del Panel Admin (copiados y adaptados) */
+.admin-section {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.admin-section h2 { color: #FFD700; margin-bottom: 20px; text-align: center; }
+.admin-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+.admin-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.3s;
+    cursor: pointer;
+    font-size: 14px;
+}
+.admin-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+.stat-card { background: rgba(255,255,255,0.08); padding: 20px; border-radius: 10px; text-align: center; }
+.stat-number { font-size: 2rem; font-weight: bold; color: #FFD700; }
+
+.user-list { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 15px; margin-top: 20px; max-height: 360px; overflow-y: auto; }
+.user-item { display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.role-badge { padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; background: rgba(0,0,0,0.12); }
+
+/* botón regreso/principal simple */
+.back-link { display:inline-block; margin: 20px auto 0; background:#fff; color:#ff6600; padding:10px 18px; border-radius:20px; text-decoration:none; font-weight:bold; }
+@media (max-width: 768px) {
+    .admin-section { margin: 18px; padding: 20px; }
+    .admin-buttons { grid-template-columns: 1fr; }
+}

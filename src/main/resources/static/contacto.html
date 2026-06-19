@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctanos | Chilapeños</title>
+  <link rel="stylesheet" href="css/prueba.css">
+  <link rel="stylesheet" href="css/contacto.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<!-- Barra superior (idéntica a Principal & Eventos) -->
+<nav class="navbar">
+  <a href="Principal.html">Inicio</a>
+  <a href="Eventos.html">Eventos</a>
+  <a href="contacto.html" class="active">Contáctanos</a>
+  <!-- PANEL ADMIN: presente en todas las páginas -->
+  <a href="PanelAdmin.html" class="admin-only">Panel Admin</a>
+  <!-- 🛒 BOTÓN DEL CARRITO -->
+  <a href="#" id="open-cart-btn" class="cart-icon-container">
+    🛒 <span class="cart-counter">0</span>
+  </a>
+</nav>
+
+<!-- Banner -->
+<section class="categorias">
+  <p class="banner">Todos nuestros domicilios tienen recargo dependiendo del lugar del domicilio</p>
+</section>
+
+<!-- Contacto -->
+<section class="contacto">
+  <h2>Contáctanos</h2>
+  <div class="contacto-grid">
+    <div class="contacto-info">
+      <h3>Información de Contacto</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Normandía sobre la CALLE 63 #78-25, Bogotá</p>
+      <p><i class="fas fa-phone"></i> Domicilios: 314 4230347</p>
+      <p><i class="fas fa-envelope"></i> contacto@chilapeños.com</p>
+      <p><i class="fas fa-clock"></i> Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
+      <p><i class="fas fa-clock"></i> Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
+      <p><i class="fas fa-clock"></i> Domingos: 1:00 p.m – 9:00 p.m</p>
+    </div>
+
+    <div class="contacto-form">
+      <h3>Envíanos un Mensaje</h3>
+      <form action="#" method="post">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required>
+
+        <label for="email">Correo</label>
+        <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono">
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje" required></textarea>
+
+        <button type="submit">Enviar Mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Mapa -->
+<section class="mapa-section">
+  <h3>Nuestra Ubicación</h3>
+  <div class="mapa-container">
+    <div class="mapa-frame">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.8234567890123!2d-74.12345678901234!3d4.654321098765432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b123456789a%3A0x123456789abcdef0!2sNormandia%2C%20CALLE%2063%20%2378-25%2C%20Bogot%C3%A1%2C%20Colombia!5e0!3m2!1ses!2sco!4v1234567890123!5m2!1ses!2sco"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de Chilapeños - Normandía, CALLE 63 #78-25, Bogotá">
+      </iframe>
+    </div>
+    <p style="margin-top:20px; color:#666; font-style:italic;">📍 ¡Encuéntranos en el barrio Normandía!</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="imagenes/varios/logo.png" alt="logo chilapeños" style="max-width:120px;">
+      <p>Ya viste nuestro menú ¿Qué quieres pedir hoy?<br>Pide tu domicilio en nuestro WhatsApp o llámanos al <br><strong>314 4230347</strong></p>
+    </div>
+
+    <div class="footer-info">
+      <h3>Horario de atención</h3>
+      <p>Lunes a jueves: 1:00 p.m – 10:00 p.m</p>
+      <p>Viernes y sábado: 1:00 p.m – 12:00 a.m</p>
+      <p>Domingos: 1:00 p.m – 9:00 p.m</p>
+
+      <h3>Métodos de pago</h3>
+      <p><strong>En nuestro restaurante:</strong> Efectivo, tarjetas débito/crédito, Nequi / Daviplata</p>
+      <p><strong>Domicilios:</strong> Efectivo, tarjetas débito/crédito, plataformas de pago</p>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Contáctanos</h3>
+      <p>📍 Normandía sobre la CALLE 63 #78-25, Bogotá</p>
+      <p>📞 Domicilios: 314 4230347 </p>
+    </div>
+  </div>
+
+  <p class="footer-copy">software3 | Copyright © 2025 <span>chilapeñitos.com</span> - Todos los derechos reservados</p>
+</footer>
+
+<!-- ✨ CARRITO LATERAL -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart-btn">&times;</button>
+    </div>
+    <div id="cart-items">
+        <p class="empty-cart-message">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-footer">
+        <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+        <button class="checkout-btn">Pagar</button>
+    </div>
+</div>
+
+<!-- Botones flotantes -->
+<div class="floating-buttons">
+    <a href="login.html" class="btn-login" id="loginFloatingBtn" title="Iniciar Sesión"><i class="fas fa-user"></i></a>
+    <button class="btn-logout" id="logoutBtn" onclick="cerrarSesion()" title="Cerrar Sesión" style="display: none;"><i class="fas fa-sign-out-alt"></i></button>
+    <a href="https://wa.me/573144230347" target="_blank" class="btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button class="btn-chat" title="ChatBot"><i class="fas fa-robot"></i></button>
+    <button class="btn-dark" id="darkModeToggle" title="Modo oscuro / claro"><i class="fas fa-moon"></i></button>
+</div>
+
+<!-- Panel del ChatBot -->
+<div id="chatbot-panel">
+    <div class="chatbot-header">
+        <h3>🤖 ChatBot</h3>
+        <button id="close-chatbot">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+        <!-- Los mensajes se insertan por JS -->
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
+        <button id="chatbot-send">Enviar</button>
+    </div>
+</div>
+
+<!-- ✨ OVERLAY -->
+<div id="overlay"></div>
+
+<!-- Carga del script de autenticación común (crea/actualiza js/auth.js con la versión que te pasé antes) -->
+<script src="js/auth.js"></script>
+<script src="javascript/js.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* ===========================
+   Estilos base coherentes con Principal y Contacto
+   =========================== */
+body {
+    background-color: #ffffff;
+    color: #222;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Ocultar por defecto admin-only para evitar parpadeo */
+.admin-only { display: none; }
+
+/* Navbar (idéntica a las otras páginas) */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background-color: #ff6600;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.navbar a.active {
+    background-color: #FFD700;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎉 Sección de Eventos */
+.eventos {
+    padding: 60px 20px;
+    background: #fafafa;
+    text-align: center;
+}
+
+.eventos h2 {
+    font-size: 2.3rem;
+    margin-bottom: 10px;
+    color: #ff6600;
+    text-transform: uppercase;
+}
+
+.eventos p {
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.evento-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.evento-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.evento-card img {
+    width: 100%;
+    height: 200px; /* Igual que en contacto/inicio */
+    object-fit: cover;
+}
+
+.evento-card .contenido {
+    padding: 20px;
+}
+
+.evento-card h3 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.evento-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.evento-card .btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #ff6600;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.evento-card .btn:hover {
+    background: #e65500;
+}
+
+/* Footer (idéntico al de Contacto y Principal) */
+footer {
+    background-color: #333333;
+    color: #fff;
+    padding: 40px 20px 20px;
+    text-align: center;
+}
+
+footer img {
+    max-width: 120px; /* igual que contacto e inicio */
+}
+
+footer h3 {
+    color: #FFD700;
+}
+
+.footer-copy {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.footer-copy span {
+    color: #FFD700;
+}
+
+/* Botones flotantes (idénticos a Contacto y Principal) */
+.floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.floating-buttons a,
+.floating-buttons button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff6600;
+    color: #fff;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.floating-buttons a:hover,
+.floating-buttons button:hover {
+    transform: scale(1.1);
+}
+
+.btn-whatsapp { background-color: #25D366; }
+.btn-chat { background-color: #0078FF; }
+.btn-login { background-color: #333; }
+.btn-dark { background-color: #111; }
+
+/* ===========================
+   🌙 Modo Oscuro
+   =========================== */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+/* ✅ Mantener navbar naranja en modo oscuro */
+body.dark-mode .navbar {
+    background-color: #ff6600;
+}
+
+body.dark-mode .navbar a {
+    color: #fff;
+}
+
+body.dark-mode .navbar a.active {
+    background-color: #FFD700;
+    color: #222;
+}
+
+body.dark-mode .eventos {
+    background: #1c1c1c;
+}
+
+body.dark-mode .evento-card {
+    background: #2b2b2b;
+    color: #eee;
+}
+
+body.dark-mode .evento-card h3 {
+    color: #FFD700;
+}
+
+body.dark-mode .evento-card p {
+    color: #ccc;
+}
+
+body.dark-mode footer {
+    background-color: #000;
+    color: #ddd;
+}
+
+/* 📱 Responsive */
+@media (max-width: 480px) {
+    .evento-card img {
+        height: 160px;
+    }
+
+    .floating-buttons {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .floating-buttons a,
+    .floating-buttons button {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .eventos h2 {
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,912 @@
+/* === PRUEBA.CSS  ===
+   Mantengo tu paleta, sombras y componentes tal como los tenías.
+   Ajustes: tarjetas con layout flex, imágenes y botones alineados, altura uniforme,
+   grid de items que estira las tarjetas para que sean simétricas. */
+
+/* --- Global Styles --- */
+* { box-sizing: border-box; }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #fafafa;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* pequeños estilos para botón eliminar (mantener) */
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #f44336;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+.remove-item-btn:hover { color: #e57373; }
+
+body.cart-open .floating-buttons { display: none; }
+
+/* Dark mode overrides (mantengo tu estilo) */
+body.dark-mode {
+    background: #121212;
+    color: #f1f1f1;
+}
+/* ... (mantengo tus overrides en modo oscuro) ... */
+body.dark-mode #cart-panel { background: #1e1e1e; color: #f1f1f1; }
+body.dark-mode #cart-panel .cart-header { background: #ff6600; color: #fff; }
+body.dark-mode #cart-panel .cart-item span { color: #f1f1f1; }
+body.dark-mode #cart-panel .cart-footer { border-top: 1px solid #444; }
+body.dark-mode #cart-panel .empty-cart-message { color: #aaa; }
+body.dark-mode #chatbot-panel { background: #1e1e1e; color: #f1f1f1; }
+body.dark-mode #chatbot-panel .chatbot-header { background: #ff6600; color: #fff; }
+body.dark-mode #chatbot-panel .bot-msg { background: #333; color: #f1f1f1; }
+body.dark-mode #chatbot-panel #chatbot-input { background: #2a2a2a; color: #f1f1f1; border: none; }
+body.dark-mode #chatbot-panel #chatbot-send { background: #28a745; }
+body.dark-mode .item { background-color: #1e1e1e; color: #eee; }
+body.dark-mode .item h2 { color: #ff944d; }
+body.dark-mode .item p { color: #ccc; }
+body.dark-mode footer { background-color: #1a1a1a; color: #ccc; }
+body.dark-mode footer h3 { color: #ff944d; }
+
+/* --- Opciones dentro del ChatBot --- */
+#chatbot-panel .chatbot-options { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+#chatbot-panel .chatbot-options button {
+    width: 100%;
+    padding: 12px 16px;
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+#chatbot-panel .chatbot-options button:hover { background: #e65500; transform: scale(1.02); }
+
+/* --- Navigation --- */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px 15px;
+    background-color: #ff6600;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+.navbar a:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+.navbar a.active { background-color: #FFD700; color: #333; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+
+.cart-icon-container { position: relative; color: white; font-size: 1.2em; text-decoration: none; }
+.cart-counter {
+    background-color: #ff5722;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.7em;
+    position: absolute;
+    top: -8px;
+    right: -12px;
+}
+
+/* --- Main Content --- */
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+.menu-container h1 {
+    font-size: 2.5em;
+    color: #ff6600;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.menu-container h2 {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+/* --- GRID: hago que las tarjetas se estiren igual --- */
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+    align-items: stretch; /* importante: estira cada tarjeta para que la altura sea consistente */
+}
+
+/* === ITEM (TARJETA) ===
+   ADAPTACIÓN: uso flex-column y justify-content: space-between
+   para que imagen, texto y botón queden alineados y la tarjeta sea simétrica. */
+.item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* empuja el botón al pie de la tarjeta */
+    min-height: 420px; /* fuerza uniformidad: ajusta si quieres tarjetas más altas/bajas */
+}
+
+/* efecto hover similar al tuyo con naranja */
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 102, 0, 0.12);
+    border-color: #ff6600;
+}
+
+/* imagen con tamaño fijo para consistencia */
+.item img {
+    width: 100%;
+    height: 200px; /* fija la altura para todas las imágenes */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+/* cabecera del producto - mantengo color y estilo */
+.item h2 {
+    color: #ff6600;
+    font-size: 1.15rem;
+    margin: 6px 0 8px 0;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* descripción: max líneas, alineada y con espacio flexible */
+.item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 14px 0;
+    font-size: 0.95rem;
+    text-align: left;
+    flex: 1 1 auto; /* ocupa espacio disponible antes del purchase-panel */
+}
+
+/* === PURCHASE PANEL ===
+   ADAPTACIÓN: centro del botón y (si mantienes cantidad) lo dejo debajo sin romper alineación */
+.purchase-panel {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+/* Mantengo tu estilo visual para la etiqueta (si la ves, puedes ocultarla) */
+.quantity-label {
+    color: #FBC531;
+    font-weight: bold;
+    font-size: 1.05em;
+    letter-spacing: 1px;
+}
+
+/* controls (si decides mantener la cantidad). */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.quantity-input {
+    width: 48px;
+    padding: 6px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+}
+.quantity-btn {
+    background: #ffcc00;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.quantity-btn:hover { background-color: #ffd452; }
+
+/* === BOTÓN Añadir al carrito  ===
+   ADAPTACIÓN: botón tipo chip con icono, sombra y borde redondeado */
+.add-to-cart-btn {
+    background: linear-gradient(#ffd966,#ffcc66);
+    color: #222;
+    font-weight: 700;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* icono pequeño a la izquierda (usa font-awesome) */
+.add-to-cart-btn::before {
+    content: "\f07a"; /* unicode del icono carrito de fontawesome */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-style: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 0.95em;
+    color: #222;
+}
+
+/* hover */
+.add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,102,0,0.12);
+}
+
+/* === CART PANEL (mantengo tu diseño con ajustes menores) === */
+#cart-panel {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: clamp(280px, 80vw, 360px);
+    height: calc(100% - 20px);
+    background-color: #fff;
+    box-shadow: -6px 0 12px rgba(0,0,0,0.3);
+    transform: translateX(120%);
+    transition: transform 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    border-radius: 12px;
+    overflow: hidden;
+}
+#cart-panel.active { transform: translateX(0); }
+
+.cart-header {
+    background: #ff6600;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px 0 0 0;
+}
+.cart-header button { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
+
+.cart-items {
+    flex-grow: 1;
+    padding: 12px;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 8px;
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item p { margin: 0; font-size: 1em; font-weight: bold; color: #333; }
+
+.cart-footer {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    text-align: right;
+    background: #fff;
+    border-radius: 0 0 0 12px;
+}
+.cart-footer p { font-size: 1.2em; font-weight: bold; color: #333; }
+.cart-footer #cart-total { color: #ff6600; }
+
+.checkout-btn {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+.checkout-btn:hover { background: #218838; }
+
+/* --- Popups --- */
+.popup-content { background: #fff; padding: 20px; border-radius: 8px; max-width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.popup-buttons { display: flex; justify-content: space-around; margin-top: 15px; }
+.popup-buttons button { padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
+.confirm-payment-btn { background: #28a745; color: #fff; }
+.cancel-payment-btn, .return-btn { background: #ccc; }
+
+/* === Footer (igual que antes) === */
+footer {
+    background-color: #333333;
+    color: #fff;
+    padding: 40px 20px 20px;
+    text-align: center;
+    margin-top: 60px;
+}
+.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: left; }
+.footer-logo img { width: 350px; margin-bottom: 10px; }
+footer h3 { color: #FFD700; margin-bottom: 15px; font-size: 1.2rem; }
+footer p { line-height: 1.6; margin-bottom: 10px; }
+.footer-logo { flex: 1 1 300px; text-align: center; }
+.footer-logo p { font-size: 14px; }
+.footer-copy { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #444; font-size: 0.9rem; }
+.footer-copy span { color: #FFD700; font-weight: bold; }
+
+/* --- Floating Buttons --- */
+.floating-buttons {
+    position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 15px; z-index: 1000;
+}
+.floating-buttons a, .floating-buttons button {
+    width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background-color: #ff6600; color: #fff; font-size: 22px; text-decoration: none; box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease-in-out; border: none; cursor: pointer;
+}
+.floating-buttons a:hover, .floating-buttons button:hover { transform: scale(1.1); }
+.btn-whatsapp { background-color: #25D366; } .btn-chat { background-color: #0078FF; } .btn-noti { background-color: #FF4444; } .btn-login { background-color: #333; } .btn-dark { background-color: #111; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .menu-container { padding: 20px 15px; }
+    .menu-container h1 { font-size: 2rem; }
+    .menu-items { grid-template-columns: 1fr; gap: 20px; }
+    .floating-buttons { bottom: 15px; right: 15px; }
+    .floating-buttons a, .floating-buttons button { width: 50px; height: 50px; font-size: 18px; }
+    .item { min-height: auto; } /* permitir que en móviles la altura sea natural */
+}
+
+/* === Chatbot Panel (igual que antes) === */
+#chatbot-panel {
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+    width: 320px;
+    height: 420px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 1100;
+}
+#chatbot-panel.active { transform: scale(1); opacity: 1; }
+.chatbot-header { background: #ff6600; color: #fff; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+.chatbot-header button { background: none; border: none; font-size: 20px; color: #fff; cursor: pointer; }
+.chatbot-messages { flex-grow: 1; padding: 10px; overflow-y: auto; font-size: 14px; }
+.bot-msg { background: #f2f2f2; padding: 8px; border-radius: 8px; margin: 5px 0; }
+.chatbot-footer { display: flex; border-top: 1px solid #ddd; }
+#chatbot-input { flex-grow: 1; border: none; padding: 10px; font-size: 14px; }
+#chatbot-send { background: #28a745; color: #fff; border: none; padding: 0 15px; cursor: pointer; }
+#chatbot-send:hover { background: #218838; }
+
+/* --- Popups Uniformes --- */
+#payment-confirmation-popup, #payment-success-popup, #empty-cart-popup {
+    display: none;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000;
+}
+#payment-confirmation-popup .popup-content, #payment-success-popup .popup-content, #empty-cart-popup .popup-content {
+    background: #fff; padding: 25px 30px; border-radius: 10px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.3); font-family: Arial, sans-serif;
+}
+.popup-buttons, #empty-cart-popup .popup-content button, #payment-success-popup .popup-content button { margin-top: 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.popup-buttons button, #empty-cart-popup .popup-content button, #payment-success-popup .popup-content button { padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s ease, transform 0.1s ease; }
+.confirm-payment-btn { background: #28a745; color: #fff; } .cancel-payment-btn, .return-btn { background: #ccc; color: #333; }
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #ff8c1a, #ff6600);
+    color: white;
+    font-weight: 600;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+    box-shadow: 0 6px 15px rgba(255, 102, 0, 0.25);
+    transition: all 0.25s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart-btn::before {
+    content: "\f07a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1.05rem;
+    transition: transform 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(255, 102, 0, 0.35);
+    background: linear-gradient(135deg, #ffa64d, #ff6600);
+}
+
+.add-to-cart-btn:hover::before {
+    transform: scale(1.2) rotate(-10deg);
+}
+
+.add-to-cart-btn:active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    to { opacity: 0; transform: translate(-50%, -50%) scale(20); }
+}
+
+body.dark-mode .add-to-cart-btn {
+    background: linear-gradient(135deg, #ff944d, #e65c00);
+    color: #fff;
+}
+
+body.dark-mode .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #ffb366, #ff6600);
+}
+/* ============================================
+   AGREGAR AL FINAL DE prueba.css
+   ============================================ */
+
+/* === BOTÓN DE CARRITO EN NAVBAR (MEJORADO) === */
+.cart-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.cart-icon-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    background: linear-gradient(135deg, #e55a2b 0%, #e08315 100%);
+}
+
+.cart-counter {
+    background: white;
+    color: #ff6b35;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    min-width: 20px;
+    text-align: center;
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* === SELECTOR DE CANTIDAD EN PRODUCTOS === */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 12px 0;
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.quantity-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+.quantity-input {
+    width: 60px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+}
+
+.quantity-input:focus {
+    outline: none;
+    border-color: #ff6b35;
+}
+
+/* === PANEL DEL CARRITO MODERNO === */
+#cart-panel {
+    position: fixed;
+    right: -450px;
+    top: 0;
+    width: 450px;
+    max-width: 100vw;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#cart-panel.active {
+    right: 0;
+}
+
+.cart-header {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cart-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-header h2::before {
+    content: "🛒";
+    font-size: 28px;
+}
+
+#close-cart-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#close-cart-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* === ITEMS DEL CARRITO === */
+#cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+#cart-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+#cart-items::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#cart-items::-webkit-scrollbar-thumb {
+    background: #ff6b35;
+    border-radius: 4px;
+}
+
+.cart-item {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.cart-item:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.cart-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.cart-item-quantity button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: #ff6b35;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.cart-item-quantity button:hover {
+    background: #e55a2b;
+    transform: scale(1.1);
+}
+
+.cart-item-quantity span {
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ff6b35;
+}
+
+.remove-item-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-item-btn:hover {
+    background: #cc0000;
+    transform: rotate(90deg) scale(1.1);
+}
+
+.empty-cart-message {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    padding: 40px 20px;
+}
+
+.empty-cart-message::before {
+    content: "🛒";
+    display: block;
+    font-size: 60px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+/* === FOOTER DEL CARRITO === */
+.cart-footer {
+    background: white;
+    padding: 20px;
+    border-top: 2px solid #f0f0f0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cart-footer p {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-footer strong {
+    color: #333;
+}
+
+#cart-total {
+    color: #ff6b35;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+}
+
+.checkout-btn:active {
+    transform: translateY(0);
+}
+
+/* === BOTÓN AGREGAR AL CARRITO MEJORADO === */
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
+    background: linear-gradient(135deg, #e55a2b 0%, #e08315 100%);
+}
+
+.add-to-cart-btn:active {
+    transform: translateY(0);
+}
+
+/* === OVERLAY === */
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    #cart-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .quantity-selector {
+        width: 100%;
+    }
+}
+
+/* === ANIMACIÓN DE ENTRADA === */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.cart-item {
+    animation: slideInFromRight 0.3s ease;
+}
+
+/* === BADGE DE NOTIFICACIÓN === */
+.cart-counter.has-items {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
