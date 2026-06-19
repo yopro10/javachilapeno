@@ -103,7 +103,7 @@ src/main/java/daotest/
 
 ### 7. Notas importantes
 
-- El proyecto usa despliegue nativo en Render (sin Docker)
+- El proyecto usa despliegue con Docker en Render.com
 - Neon.tech proporciona PostgreSQL gratis permanente (a diferencia del Postgres gratis de Render que se borra a los 30 días)
 - La fecha se establece automáticamente al agregar items al carrito
 - La base de datos se crea automáticamente con Hibernate (ddl-auto: update)
