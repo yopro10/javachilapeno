@@ -17,16 +17,14 @@ Backend Spring Boot para gestión de carrito de compras con PostgreSQL.
 - Username: `neondb_owner`
 - Password: `npg_Jh0lI5EpVcbR`
 
-### 2. Configurar variables de entorno en Render.com
+### 2. Configurar Web Service en Render.com con Docker
 
 1. Ve a [https://render.com](https://render.com)
 2. Crea una cuenta gratuita (sin tarjeta)
-3. Conecta tu repositorio de GitHub
+3. Conecta tu repositorio de GitHub (yopro10/javachilapeno)
 4. Crea un nuevo "Web Service"
-5. Selecciona tu repositorio
-6. En "Build & Deploy", configura:
-   - **Build Command**: `mvn clean package -DskipTests`
-   - **Start Command**: `java -jar target/javachilapeno-1.0-SNAPSHOT.jar`
+5. Selecciona tu repositorio y la rama `main`
+6. En "Runtime Environment", selecciona **"Docker"**
 7. En "Environment", agrega las siguientes variables de entorno:
 
 ```
@@ -35,6 +33,8 @@ DATABASE_USERNAME=neondb_owner
 DATABASE_PASSWORD=npg_Jh0lI5EpVcbR
 PORT=8080
 ```
+
+**Nota**: No necesitas configurar Build Command ni Start Command cuando usas Docker, Render detecta automáticamente el Dockerfile.
 
 ### 3. Probar localmente con Neon.tech
 
